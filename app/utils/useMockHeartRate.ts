@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { startMockHeartRate } from "./mockHeartRate";
+import startMockHeartRate from "./mockHeartRate";
 
-export function useMockHeartRate() {
+
+export default function useMockHeartRate() {
   const [hr, setHr] = useState(75);
 
   useEffect(() => {

@@ -5,7 +5,10 @@ type Store = {
   setHr: (val: number) => void;
 };
 
-export const useHeartRateStore = create<Store>((set) => ({
+const useHeartRateStore = create<Store>((set) => ({
   hr: 75,
   setHr: (val) => set({ hr: val }),
 }));
+
+export default useHeartRateStore;
+

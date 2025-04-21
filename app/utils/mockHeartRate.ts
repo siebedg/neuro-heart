@@ -1,4 +1,4 @@
-export function startMockHeartRate(callback: (hr: number) => void) {
+export default function startMockHeartRate(callback: (hr: number) => void) {
   let hr = 75;
 
   return setInterval(() => {
