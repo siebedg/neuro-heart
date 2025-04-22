@@ -1,3 +1,4 @@
+
 export default function startMockHeartRate(callback: (hr: number) => void) {
   let hr = 75;
 
@@ -10,4 +11,3 @@ export default function startMockHeartRate(callback: (hr: number) => void) {
 }
 
 startMockHeartRate((hr) => console.log("Mocked HR:", hr));
-

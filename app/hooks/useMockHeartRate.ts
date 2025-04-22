@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import startMockHeartRate from "./mockHeartRate";
+import startMockHeartRate from "../utils/mockHeartRate";
 
 
 export default function useMockHeartRate() {

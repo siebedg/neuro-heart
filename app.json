@@ -2,10 +2,11 @@
   "expo": {
     "name": "neuro-heart",
     "slug": "neuro-heart",
+    "owner": "neuro-heart",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "neuro-heart",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
