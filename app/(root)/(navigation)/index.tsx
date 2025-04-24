@@ -1,5 +1,5 @@
-import useMockHeartRate from "@/app/hooks/useMockHeartRate";
-import ProtectedRoute from "@/app/utils/ProtectedRoute";
+import useMockHeartRate from "@/hooks/useMockHeartRate";
+import ProtectedRoute from "@/utils/ProtectedRoute";
 import { Link } from "expo-router";
 import { Text, View } from "react-native";
 

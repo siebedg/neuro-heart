@@ -1,5 +1,5 @@
-import { auth } from "@/app/firebase/config";
-import ProtectedRoute from "@/app/utils/ProtectedRoute";
+import { auth } from "@/firebase/config";
+import ProtectedRoute from "@/utils/ProtectedRoute";
 import { signOut } from "firebase/auth";
 import React from "react";
 import { View, Text, Button } from "react-native";

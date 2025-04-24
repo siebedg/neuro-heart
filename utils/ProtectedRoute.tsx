@@ -1,7 +1,7 @@
 import { useRootNavigationState, useRouter } from "expo-router";
 import { useEffect } from "react";
 import { View, ActivityIndicator } from "react-native";
-import useAuthStore from "@/app/store/authStore";
+import useAuthStore from "@/store/authStore";
 
 export default function ProtectedRoute(WrappedComponent: React.ComponentType) {
   return function ProtectedComponent(props: any) {

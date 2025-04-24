@@ -1,4 +1,4 @@
-import { auth } from "@/app/firebase/config";
+import { auth } from "@/firebase/config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { View, Text, TextInput, Button, Alert } from "react-native";
