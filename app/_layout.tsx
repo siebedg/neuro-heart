@@ -6,8 +6,11 @@ import { useEffect, useState } from "react";
 import { auth } from "@/firebase/config";
 import useAuthStore from "@/store/authStore";
 import { useRouter } from "expo-router";
+import useMockHeartRate from "@/hooks/useMockHeartRate";
 
 export default function RootLayout() {
+  useMockHeartRate();
+
   const setUser = useAuthStore((s) => s.setUser);
   const router = useRouter();
   const [loading, setLoading] = useState(true);

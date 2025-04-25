@@ -1,10 +1,11 @@
-import useMockHeartRate from "@/hooks/useMockHeartRate";
+import HeartRateGraph from "@/components/HeartRateGraph";
+import useHeartRateStore from "@/store/heartRateStore";
 import ProtectedRoute from "@/utils/ProtectedRoute";
 import { Link } from "expo-router";
 import { Text, View } from "react-native";
 
 function Index() {
-  const hr = useMockHeartRate();
+  const hr = useHeartRateStore((state) => state.hr);
 
   return (
     <View
@@ -14,11 +15,8 @@ function Index() {
         alignItems: "center",
       }}
     >
-    <Text className="text-5xl font-bold text-cyan-600 mb-8 tracking-tight">
-      Cortune
-    </Text>
-      <Text className="text-3xl text-cyan-800 text-center">
-        Live, laugh, love.
+      <Text className="text-5xl font-bold text-cyan-600 mb-8 tracking-tight">
+        Cortune
       </Text>
       <Text> {"\n"}</Text>
       <Text className="text-xl">Current heartrate: {hr}</Text>
@@ -26,8 +24,10 @@ function Index() {
       <Link className="text-xl text-sky-600 underline" href="/profile">
         Profile
       </Link>
+
+      <HeartRateGraph />
     </View>
   );
 }
 
-export default ProtectedRoute(Index)
+export default ProtectedRoute(Index);

@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { logHeartRateToFirestore } from "../services/heartRateService";
 import useSessionManager from "./useSessionManager";
+import useHeartRateStore from "@/store/heartRateStore";
 
 // Deze hook is klaar voor koppeling met een echte WearOS hartslagsensor
 export default function useWearOSHeartRate() {
   const { sessionId } = useSessionManager();
-  const [hr, setHr] = useState(75);
+  const setHr = useHeartRateStore((state) => state.setHr);
 
   useEffect(() => {
     let lastWrite = Date.now();
@@ -25,5 +26,5 @@ export default function useWearOSHeartRate() {
     return () => clearInterval(mockWearOSInterval); // 🔁 Vervang met echte unsubscribe-functie
   }, []);
 
-  return hr;
+  return null;
 }
