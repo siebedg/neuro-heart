@@ -21,10 +21,9 @@ function Index() {
       <Text> {"\n"}</Text>
       <Text className="text-xl">Current heartrate: {hr}</Text>
       <Text> {"\n"}</Text>
-      <Link className="text-xl text-sky-600 underline" href="/profile">
-        Profile
+      <Link className="text-xl text-sky-600 underline" href="/home/nested-home">
+        Nested Home
       </Link>
-
       <HeartRateGraph />
     </View>
   );

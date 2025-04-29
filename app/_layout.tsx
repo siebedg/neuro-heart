@@ -1,5 +1,5 @@
-import "./global.css";
 // import './firebase/appcheck_init'; // Wacht met App Check tot de native SDK (of dev client) gebruikt wordt
+import "./global.css";
 import { Stack } from "expo-router";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
@@ -28,5 +28,6 @@ export default function RootLayout() {
 
   if (loading) return null; // or splash
 
-  return <Stack />;
+  return <Stack screenOptions={{ headerShown: false }} />;
+  // return <Stack />;
 }

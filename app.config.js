@@ -15,6 +15,7 @@ export default {
       supportsTablet: true,
     },
     android: {
+      package: "com.neuroheart.neuroheart",
       adaptiveIcon: {
         foregroundImage: "./assets/images/adaptive-icon.png",
         backgroundColor: "#ffffff",
