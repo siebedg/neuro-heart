@@ -21,9 +21,6 @@ const Profile = () => {
         alignItems: "center",
       }}
     >
-      <Text className="text-3xl text-cyan-600 text-center">
-        siebe.de.gelas@gmail.com
-      </Text>
       <Text> {"\n"}</Text>
       <Button title="Logout" onPress={handleLogout} color="#0891b2" />
     </View>

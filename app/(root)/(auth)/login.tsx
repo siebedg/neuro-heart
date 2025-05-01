@@ -35,7 +35,7 @@ export default function LoginScreen() {
         onChangeText={setPassword}
       />
       <Button title="Login" onPress={login} />
-      <Link href="/create-account" className="text-blue-500 mt-4">
+      <Link href="/register/name" className="text-blue-500 mt-4">
         Don't have an account? Register
       </Link>
     </View>
