@@ -1,5 +1,5 @@
 import { auth } from "@/firebase/config";
-import ProtectedRoute from "@/utils/ProtectedRoute";
+// import useProtectedRoute from "@/hooks/useProtectedRoute";
 import { signOut } from "firebase/auth";
 import React from "react";
 import { View, Text, Button } from "react-native";
@@ -27,4 +27,4 @@ const Profile = () => {
   );
 };
 
-export default ProtectedRoute(Profile);
+export default Profile;

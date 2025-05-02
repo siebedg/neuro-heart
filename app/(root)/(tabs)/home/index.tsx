@@ -1,6 +1,6 @@
 import HeartRateGraph from "@/components/HeartRateGraph";
+// import useProtectedRoute from "@/hooks/useProtectedRoute";
 import useHeartRateStore from "@/store/heartRateStore";
-import ProtectedRoute from "@/utils/ProtectedRoute";
 import { Link } from "expo-router";
 import { Text, View } from "react-native";
 
@@ -29,4 +29,4 @@ function Index() {
   );
 }
 
-export default ProtectedRoute(Index);
+export default Index;

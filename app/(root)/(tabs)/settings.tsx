@@ -1,4 +1,3 @@
-import ProtectedRoute from "@/utils/ProtectedRoute";
 import React from "react";
 import { View, Text } from "react-native";
 
@@ -16,4 +15,4 @@ const Settings = () => {
   );
 };
 
-export default ProtectedRoute(Settings);
+export default Settings;
