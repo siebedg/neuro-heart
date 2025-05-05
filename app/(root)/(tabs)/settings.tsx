@@ -1,3 +1,4 @@
+import MakeSomeNoise from "@/components/MakeSomeNoise";
 import React from "react";
 import { View, Text } from "react-native";
 
@@ -10,7 +11,7 @@ const Settings = () => {
         alignItems: "center",
       }}
     >
-      <Text className="text-3xl text-cyan-600 text-center">Settings</Text>
+      <MakeSomeNoise />
     </View>
   );
 };
