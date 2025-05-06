@@ -1,4 +1,4 @@
-import { db } from "@/firebase/firestore";
+import { db } from "@/src/firebase/firestore";
 import { auth } from "../firebase/config";
 import { addDoc, collection, doc, serverTimestamp, updateDoc } from "firebase/firestore";
 

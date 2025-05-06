@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import startMockHeartRate from "../utils/mockHeartRate"; // Later dit vervangen naar een WearOS hook
 import { logHeartRateToFirestore } from "../services/heartRateService";
 import useSessionManager from "./useSessionManager";
-import useHeartRateStore from "@/store/heartRateStore";
+import useHeartRateStore from "@/src/store/heartRateStore";
 
 export default function useMockHeartRate() {
   const { sessionId } = useSessionManager();

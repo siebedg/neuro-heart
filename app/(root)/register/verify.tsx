@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { View, Text, TextInput, Button, Alert } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
-import { auth } from "@/firebase/config";
+import { auth } from "@/src/firebase/config";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
 export default function RegisterVerifyScreen() {

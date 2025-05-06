@@ -1,5 +1,5 @@
-import { auth } from "@/firebase/config";
-import useAuthStore from "@/store/authStore";
+import { auth } from "@/src/firebase/config";
+import useAuthStore from "@/src/store/authStore";
 import { router } from "expo-router";
 import { signOut } from "firebase/auth";
 import React from "react";

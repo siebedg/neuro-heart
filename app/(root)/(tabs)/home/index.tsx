@@ -1,6 +1,6 @@
-import HeartRateGraph from "@/components/HeartRateGraph";
+import HeartRateGraph from "@/src/components/HeartRateGraph";
 // import useProtectedRoute from "@/hooks/useProtectedRoute";
-import useHeartRateStore from "@/store/heartRateStore";
+import useHeartRateStore from "@/src/store/heartRateStore";
 import { Link } from "expo-router";
 import { Text, View } from "react-native";
 

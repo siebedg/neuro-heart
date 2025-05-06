@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text } from "react-native";
-import useHeartRateStore from "@/store/heartRateStore";
+import useHeartRateStore from "@/src/store/heartRateStore";
 
 export default function HeartRateGraph() {
   const hrHistory = useHeartRateStore((s) => s.hrHistory);

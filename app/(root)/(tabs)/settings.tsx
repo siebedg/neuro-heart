@@ -1,4 +1,4 @@
-import MakeSomeNoise from "@/components/MakeSomeNoise";
+import MakeSomeNoise from "@/src/components/MakeSomeNoise";
 import React from "react";
 import { View, Text } from "react-native";
 
