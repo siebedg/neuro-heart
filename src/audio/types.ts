@@ -47,8 +47,8 @@ type AudioPreset = {
   // isPremium?: boolean;
 };
 
-type Zone = "activation" | "sustained" | "recovery"; // | "1" | "2" | "3" | "4" | "5";
-type HRState = "tooLow" | "optimal" | "tooHigh";
+export type Zone = "activation" | "sustained" | "recovery"; // | "1" | "2" | "3" | "4" | "5";
+export type HRState = "tooLow" | "optimal" | "tooHigh";
 
 export type PresetStructure = {
   [zone in Zone]: {

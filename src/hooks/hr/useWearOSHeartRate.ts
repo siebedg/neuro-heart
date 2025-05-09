@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { logHeartRateToFirestore } from "../services/heartRateService";
-import useSessionManager from "./useSessionManager";
+import { logHeartRateToFirestore } from "../../services/heartRateService";
+import useSessionManager from "../useSessionManager";
 import useHeartRateStore from "@/src/store/heartRateStore";
 
 // Deze hook is klaar voor koppeling met een echte WearOS hartslagsensor
