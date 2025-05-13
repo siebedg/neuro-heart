@@ -19,7 +19,7 @@ export default function useMockHeartRate(
     baseHeartRate: 130,
   }
 ) {
-  // 🔄 State management
+  // State management
   const setHr = useHeartRateStore((state) => state.setHr);
   const addHrToHistory = useHeartRateStore((state) => state.addHrToHistory);
   const setCurrentHeartRateData = useHeartRateStore(
@@ -27,18 +27,13 @@ export default function useMockHeartRate(
   );
 
   useEffect(() => {
-    // 🧹 Reset smoothing bij nieuwe sessie
     resetHeartRateSmoothing();
 
-    // 🕐 Start de mock heart rate generator
     const interval = startMockHeartRate((data: MockHeartRateData) => {
       const { heartRate, timestamp } = data;
-
-      // 📊 Update de huidige hartslag
       setHr(heartRate);
       addHrToHistory(heartRate);
 
-      // 🗂️ Classificeer de hartslag
       const zoneInfo = classifyHR(
         heartRate,
         {
@@ -57,7 +52,6 @@ export default function useMockHeartRate(
       });
     }, options.baseHeartRate ?? 130);
 
-    // 🛑 Stop de interval bij unmount
     return () => clearInterval(interval);
   }, [options.useSmoothing, options.baseHeartRate]);
 

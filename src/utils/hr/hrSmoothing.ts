@@ -1,80 +1,61 @@
-/**
- * Interface voor hartslagmetingen
- */
 export interface HeartRateDataPoint {
   heartRate: number;
   timestamp: number;
 }
 
-/**
- * Eenvoudige buffer voor 30-seconden gemiddelde
- */
+// Tijdgebaseerde buffer
 export class SimpleHeartRateBuffer {
-  private buffer: number[] = [];
-  private readonly maxSize: number;
+  private buffer: HeartRateDataPoint[] = [];
+  private readonly maxDuration: number;
 
-  constructor(maxSize: number = 30) {
-    this.maxSize = maxSize;
+  constructor(maxDuration: number = 15000) {
+    // 15 seconden
+    this.maxDuration = maxDuration;
   }
 
-  /**
-   * Voeg een nieuwe hartslag toe en beperk bufferlengte
-   */
-  public add(heartRate: number): void {
-    this.buffer.push(heartRate);
-    if (this.buffer.length > this.maxSize) {
-      this.buffer.shift(); // Verwijder oudste item
-    }
+  // Voeg nieuwe hartslag toe en verwijder oude metingen
+  public add(data: HeartRateDataPoint): void {
+    const now = Date.now();
+    this.buffer.push(data);
+    this.buffer = this.buffer.filter(
+      (point) => now - point.timestamp <= this.maxDuration
+    );
   }
 
-  /**
-   * Bereken het eenvoudige gemiddelde
-   */
+  // Bereken gemiddelde
   public getAverage(): number | null {
     if (this.buffer.length === 0) return null;
-    const sum = this.buffer.reduce((a, b) => a + b, 0);
+    const sum = this.buffer.reduce((a, b) => a + b.heartRate, 0);
     return Math.round(sum / this.buffer.length);
   }
 
-  /**
-   * Reset de buffer
-   */
   public reset(): void {
     this.buffer = [];
   }
 }
 
-/**
- * Simpele smoothing met fallback naar de laatste waarde
- */
+// Simpele smoothing met fallback naar de laatste waarde
 export class SimpleHeartRateSmoothing {
   private buffer: SimpleHeartRateBuffer;
   private lastValue: number | null = null;
 
-  constructor(windowSize: number = 30) {
-    this.buffer = new SimpleHeartRateBuffer(windowSize);
+  constructor(windowSizeMs: number = 15000) {
+    this.buffer = new SimpleHeartRateBuffer(windowSizeMs);
   }
 
-  /**
-   * Verwerk een nieuwe hartslag
-   */
+  // Verwerk nieuwe hartslag
   public process(heartRate: number): number {
-    this.buffer.add(heartRate);
+    const timestamp = Date.now();
+    this.buffer.add({ heartRate, timestamp });
     const avg = this.buffer.getAverage();
     this.lastValue = avg !== null ? avg : heartRate;
     return this.lastValue;
   }
 
-  /**
-   * Krijg de laatste waarde
-   */
   public getLastValue(): number | null {
     return this.lastValue;
   }
 
-  /**
-   * Reset de buffer
-   */
   public reset(): void {
     this.buffer.reset();
     this.lastValue = null;

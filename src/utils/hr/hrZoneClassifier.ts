@@ -8,17 +8,14 @@ export interface UserCardioProfile {
   fitnessLevel: "beginner" | "intermediate" | "advanced";
 }
 
-/** Globale smoothing buffer voor alle HR-verwerking */
-const heartRateSmoother = new SimpleHeartRateSmoothing(30); // 30 data points ≈ 30s window
+const heartRateSmoother = new SimpleHeartRateSmoothing(15000); // 15s window
 
-/** Basis HRR zone-limieten */
 const BASE_LIMITS: Record<Zone, [number, number]> = {
   recovery: [0.4, 0.6],
   sustained: [0.6, 0.8],
   activation: [0.8, 0.9],
 };
 
-/** Fitnessniveau aanpassingen */
 const FITNESS_ADJUSTMENTS = {
   beginner: -0.05,
   intermediate: 0.0,
@@ -82,6 +79,10 @@ export function classifyHR(
 }
 
 /** Personaliseer HR-zones */
+// // Waarvoor Gebruiken?
+// // // Dashboards: Zones in grafieken tonen.
+// // // Instellingen: Zonegrenzen aanpassen.
+// // // Coaching Apps: Zoneniveaus aan gebruikers laten zien.
 export function getPersonalizedZones(profile: UserCardioProfile): Record<Zone, { min: number; max: number }> {
   const hrMax = profile.hrMax || calculateHRMax(profile.age);
   const hrRest = profile.hrRest;

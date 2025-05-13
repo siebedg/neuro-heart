@@ -7,7 +7,7 @@ import { UserCardioProfile } from "./hrZoneClassifier";
 export function runDemo() {
   console.log("===== HR Demo =====");
 
-  // 📝 Maak een gebruikersprofiel
+  // Maak gebruikersprofiel
   const userProfile: UserCardioProfile = {
     hrRest: 55,
     hrMax: 185,
@@ -17,14 +17,14 @@ export function runDemo() {
 
   console.log("Gebruikersprofiel:", userProfile);
 
-  // 📊 Toon gepersonaliseerde zones
+  // Toon gepersonaliseerde zones
   const zones = getPersonalizedZones(userProfile);
   console.log("\nGepersonaliseerde hartslagzones:");
   for (const [zone, limits] of Object.entries(zones)) {
     console.log(`- Zone ${zone}: ${limits.min} - ${limits.max} bpm`);
   }
 
-  // 🏃‍♂️ Simuleer hartslagmetingen
+  // Simuleer hartslagmetingen
   console.log("\nHartslagclassificatie zonder smoothing:");
   const heartRates = [60, 90, 120, 150, 170];
   for (const hr of heartRates) {
@@ -36,7 +36,7 @@ export function runDemo() {
     );
   }
 
-  // 💧 Met smoothing
+  // Met smoothing
   console.log("\nHartslagclassificatie met smoothing:");
   const smoothedRates = [60, 80, 100, 120, 140, 160, 180];
   for (const hr of smoothedRates) {

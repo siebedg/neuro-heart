@@ -30,7 +30,6 @@ export default function RootLayout() {
     baseHeartRate: 130,
   });
 
-    // 🏃‍♂️ Run de demo eenmalig bij opstarten
     useEffect(() => {
       runDemo();
     }, []);
