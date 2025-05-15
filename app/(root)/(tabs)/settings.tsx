@@ -1,6 +1,7 @@
 import MakeSomeNoise from "@/src/components/MakeSomeNoise";
+import TestComponent from "@/src/components/TestComponent";
 import React from "react";
-import { View, Text } from "react-native";
+import { Text, View } from "react-native";
 
 const Settings = () => {
   return (
@@ -12,6 +13,8 @@ const Settings = () => {
       }}
     >
       <MakeSomeNoise />
+      <TestComponent />
+      <Text>Settings</Text>
     </View>
   );
 };

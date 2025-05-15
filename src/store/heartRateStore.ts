@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { HRState, Zone } from "@/src/audio/types";
+import { HRState, Zone } from "@/src/audio/types/audioPresets";
 
 type SessionStats = {
   avg: number;

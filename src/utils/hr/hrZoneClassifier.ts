@@ -1,4 +1,4 @@
-import { HRState, Zone } from "@/src/audio/types";
+import { HRState, Zone } from "@/src/audio/types/audioPresets";
 import { SimpleHeartRateSmoothing } from "./hrSmoothing";
 
 export interface UserCardioProfile {

@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Button } from "react-native";
 import { AudioContext } from "react-native-audio-api";
+import { getAudioContext } from "../audio/audioContext";
 
 const MakeSomeNoise = () => {
   const handlePlay = async () => {
@@ -21,6 +22,7 @@ const MakeSomeNoise = () => {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Button onPress={handlePlay} title="Play sound!" />
+      <Button onPress={() => getAudioContext()} title="Trigger audioContext" />
     </View>
   );
 };
