@@ -3,6 +3,7 @@ import React from "react";
 import { View, Button, Text } from "react-native";
 import Slider from "@react-native-community/slider";
 import { useAudioStore } from "../../audio/state/audioStore";
+import { getRandomPreset } from "@/src/audio/presets/presetUtils";
 // import { preloadAllPresets } from "../../audio/engine/audioPreloader";
 
 export default function App() {
@@ -16,10 +17,16 @@ export default function App() {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Button
-        title={
-          isPlaying ? "Stop" : "Play"
-        }
+        title={isPlaying ? "Stop" : "Play"}
         onPress={() => (isPlaying ? stop() : play("activation", "tooLow"))}
+      />
+      <Button
+        title="Get random preset"
+        onPress={() => getRandomPreset("activation", "tooLow")}
+      />
+      <Button
+        title="Get random preset 155"
+        onPress={() => getRandomPreset("activation", "tooLow", [155, 200])}
       />
     </View>
   );

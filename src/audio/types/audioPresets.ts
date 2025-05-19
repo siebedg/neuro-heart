@@ -22,13 +22,18 @@ type BinauralConfig = {
   gain?: number; // optioneel: 0.0 - 1.0 voor volume van binaural layer
 };
 
-type AudioPreset = {
+export interface Loop {
+  url: string;
+  bpm: number;
+}
+
+export type AudioPreset = {
   id: string;
   mood: Mood;
   bpm: BPMRange;
   loudnessDb: VolumeRange;
   tempoStyle: string;
-  loopUrls: string[];
+  loopUrls: Loop[];
   loop?: boolean;
   fadeInMs?: number;
   fadeOutMs?: number;
@@ -38,6 +43,7 @@ type AudioPreset = {
   label: string;
   debugLabel?: string; // for debugging purposes, not shown to users
   description?: string;
+  selectedLoop?: string;
   binauralConfig?: BinauralConfig;
   // // Optional - Add later when needed
   // startOffsetMs?: number;

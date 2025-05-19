@@ -1,47 +1,44 @@
 import { loadAudioBuffer } from "./audioBufferLoader";
 import { getAudioContext } from "./audioContext";
 import { AudioBuffer, AudioBufferSourceNode } from "react-native-audio-api";
-import audioPresets from "../presets/audioPresets";
 import { Zone, HRState } from "../types/audioPresets";
 import { errorLog, log } from "../../utils/log.util";
+import { getRandomPreset } from "../presets/presetUtils";
 
 let currentSource: AudioBufferSourceNode | null = null;
 let currentPresetId: string | null = null;
 
-export async function playPreset(zone: Zone, state: HRState) {
+export async function playPreset(
+  zone: Zone,
+  state: HRState,
+  bpmRange?: [number, number]
+) {
   try {
-    const moodPresets = audioPresets[zone]?.[state];
-    if (!moodPresets || moodPresets.length === 0) {
-      errorLog(
-        `No presets found for zone "${zone}" and state "${state}"`,
-        "PRESET"
-      );
-      return;
-    }
+    const preset = getRandomPreset(zone, state, bpmRange);
+    if (!preset || !preset.selectedLoop) return;
 
-    const preset = moodPresets[Math.floor(Math.random() * moodPresets.length)];
-    // const url = preset.loopUrls[0]; // Later hier op bpm filteren
+    // const url = preset.selectedLoop;
     const url =
       "https://software-mansion.github.io/react-native-audio-api/audio/music/example-music-01.mp3";
-    log(`Playing preset: ${preset.id} (${url})`, "AUDIO");
+    log(`Playing preset: ${preset.id} met loop: ${url}`, "AUDIO");
 
     const audioBuffer = await loadAudioBuffer(url);
     const audioContext = getAudioContext();
 
-    // Stop the current buffer if it's playing
+    // Stop de huidige bron als die nog speelt
     if (currentSource) {
       currentSource.stop();
       currentSource.disconnect();
       log("Current buffer stopped", "AUDIO");
     }
 
-    // Create a new AudioBufferSourceNode
+    // Maak een nieuwe AudioBufferSourceNode aan
     const source = audioContext.createBufferSource();
     source.buffer = audioBuffer as AudioBuffer;
     source.connect(audioContext.destination);
     source.start();
 
-    // Save the current node for later stopping
+    // Sla de huidige node op voor later stoppen
     currentSource = source;
     currentPresetId = preset.id;
     log(`Started playing: ${url}`, "AUDIO");
