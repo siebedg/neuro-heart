@@ -1,31 +1,26 @@
-import React, { useEffect } from "react";
-import { View, Button } from "react-native";
-import { preloadAllPresets } from "../../audio/engine/audioPreloader";
-// import { playPreset, stopPreset } from "../audio/audioEngine";
-import { useAudioStore } from "../../audio/store/audioStore";
-
+import React from "react";
+// import React, { useEffect } from "react";
+import { View, Button, Text } from "react-native";
+import Slider from "@react-native-community/slider";
+import { useAudioStore } from "../../audio/state/audioStore";
+// import { preloadAllPresets } from "../../audio/engine/audioPreloader";
 
 export default function App() {
-    const { play, stop, isPlaying } = useAudioStore();
+  const { play, stop, isPlaying } = useAudioStore();
 
-    useEffect(() => {
-        // Preload all presets on app launch
-        preloadAllPresets();
-    }, []);
- 
-    return (
-        // <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        //     <Text>🎧 Testing Audio Preloader</Text>
-        //     <Button title="▶️ Play Activation Too Low" onPress={() => playPreset("activation", "tooLow")} />
-        //     <Button title="🛑 Stop" onPress={stopPreset}/>
-        // </View>
-        <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+  // useEffect(() => {
+  //     // Preload all presets on app launch
+  //     preloadAllPresets();
+  // }, []);
+
+  return (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Button
-        title={isPlaying ? "Stop" : "Play Activation op MAAANDDAAAGGG (Too Low)"}
-        onPress={() =>
-          isPlaying ? stop() : play("activation", "tooLow")
+        title={
+          isPlaying ? "Stop" : "Play"
         }
+        onPress={() => (isPlaying ? stop() : play("activation", "tooLow"))}
       />
     </View>
-    );
+  );
 }

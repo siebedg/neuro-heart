@@ -11,7 +11,7 @@ type AudioState = {
   stop: () => void;
 };
 
-export const useAudioStore = create<AudioState>((set) => ({
+export const useAudioStore = create<AudioState>((set, get) => ({
   currentPresetId: null,
   isPlaying: false,
   currentZone: null,
@@ -27,4 +27,3 @@ export const useAudioStore = create<AudioState>((set) => ({
     stopPreset();
   },
 }));
- 

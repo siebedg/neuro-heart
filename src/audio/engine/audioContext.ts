@@ -1,13 +1,14 @@
 import { AudioContext } from "react-native-audio-api";
+import { log } from "../../utils/log.util";
 
 let audioContext: AudioContext | null = null;
 
 export function getAudioContext(): AudioContext {
     if (!audioContext) {
         audioContext = new AudioContext();
-        console.log("✅ AudioContext aangemaakt");
+        log("✅ AudioContext aangemaakt", "CONTEXT");
     } else {
-        console.log("🔄 Bestaande AudioContext gebruikt");
+        log("🔄 Bestaande AudioContext gebruikt", "CONTEXT");
     }
     return audioContext;
 }

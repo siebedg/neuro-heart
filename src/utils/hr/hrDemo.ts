@@ -1,3 +1,4 @@
+import { log } from "@/src/utils/log.util";
 import { classifyHR, getPersonalizedZones } from "./hrZoneClassifier";
 import { UserCardioProfile } from "./hrZoneClassifier";
 
@@ -5,7 +6,7 @@ import { UserCardioProfile } from "./hrZoneClassifier";
  * Run the HR demo - Test classification and smoothing
  */
 export function runDemo() {
-  console.log("===== HR Demo =====");
+  log("===== HR Demo =====", "DEMO");
 
   // Maak gebruikersprofiel
   const userProfile: UserCardioProfile = {
@@ -15,38 +16,39 @@ export function runDemo() {
     fitnessLevel: "intermediate",
   };
 
-  console.log("Gebruikersprofiel:", userProfile);
-
+  log(`Gebruikersprofiel: ${JSON.stringify(userProfile)}`, "DEMO");
   // Toon gepersonaliseerde zones
   const zones = getPersonalizedZones(userProfile);
-  console.log("\nGepersonaliseerde hartslagzones:");
+  log("\nGepersonaliseerde hartslagzones:", "DEMO");
   for (const [zone, limits] of Object.entries(zones)) {
-    console.log(`- Zone ${zone}: ${limits.min} - ${limits.max} bpm`);
+    log(`- Zone ${zone}: ${limits.min} - ${limits.max} bpm`, "DEMO");
   }
 
   // Simuleer hartslagmetingen
-  console.log("\nHartslagclassificatie zonder smoothing:");
+  log("\nHartslagclassificatie zonder smoothing:", "DEMO");
   const heartRates = [60, 90, 120, 150, 170];
   for (const hr of heartRates) {
     const result = classifyHR(hr, userProfile, false);
-    console.log(
+    log(
       `HR ${hr} bpm → Zone: ${result.zone}, State: ${result.state}, Rel: ${(
         result.rel * 100
-      ).toFixed(2)}%`
+      ).toFixed(2)}%`,
+      "DEMO"
     );
   }
 
   // Met smoothing
-  console.log("\nHartslagclassificatie met smoothing:");
+  log("\nHartslagclassificatie met smoothing:", "DEMO");
   const smoothedRates = [60, 80, 100, 120, 140, 160, 180];
   for (const hr of smoothedRates) {
     const result = classifyHR(hr, userProfile, true);
-    console.log(
+    log(
       `HR ${hr} bpm (smoothed) → Zone: ${result.zone}, State: ${
         result.state
-      }, Rel: ${(result.rel * 100).toFixed(2)}%`
+      }, Rel: ${(result.rel * 100).toFixed(2)}%`,
+      "DEMO"
     );
   }
 
-  console.log("\n=== Demo Voltooid ===");
+  log("\n=== Demo Voltooid ===", "DEMO");
 }

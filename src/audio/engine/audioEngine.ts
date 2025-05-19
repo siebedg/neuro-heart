@@ -2,24 +2,28 @@ import { loadAudioBuffer } from "./audioBufferLoader";
 import { getAudioContext } from "./audioContext";
 import { AudioBuffer, AudioBufferSourceNode } from "react-native-audio-api";
 import audioPresets from "../presets/audioPresets";
-import { Zone, HRState, PresetStructure } from "../types/audioPresets";
+import { Zone, HRState } from "../types/audioPresets";
+import { errorLog, log } from "../../utils/log.util";
 
 let currentSource: AudioBufferSourceNode | null = null;
 let currentPresetId: string | null = null;
-
 
 export async function playPreset(zone: Zone, state: HRState) {
   try {
     const moodPresets = audioPresets[zone]?.[state];
     if (!moodPresets || moodPresets.length === 0) {
-        console.error(`No presets found for zone "${zone}" and state "${state}"`);
-        return;
+      errorLog(
+        `No presets found for zone "${zone}" and state "${state}"`,
+        "PRESET"
+      );
+      return;
     }
 
     const preset = moodPresets[Math.floor(Math.random() * moodPresets.length)];
     // const url = preset.loopUrls[0]; // Later hier op bpm filteren
-    const url = "https://software-mansion.github.io/react-native-audio-api/audio/music/example-music-01.mp3";
-    console.log(`🎵 Spelen van preset: ${preset.id} (${url})`);
+    const url =
+      "https://software-mansion.github.io/react-native-audio-api/audio/music/example-music-01.mp3";
+    log(`Playing preset: ${preset.id} (${url})`, "AUDIO");
 
     const audioBuffer = await loadAudioBuffer(url);
     const audioContext = getAudioContext();
@@ -28,7 +32,7 @@ export async function playPreset(zone: Zone, state: HRState) {
     if (currentSource) {
       currentSource.stop();
       currentSource.disconnect();
-      console.log("Current buffer stopped");
+      log("Current buffer stopped", "AUDIO");
     }
 
     // Create a new AudioBufferSourceNode
@@ -40,9 +44,9 @@ export async function playPreset(zone: Zone, state: HRState) {
     // Save the current node for later stopping
     currentSource = source;
     currentPresetId = preset.id;
-    console.log(`Started playing: ${url}`);
+    log(`Started playing: ${url}`, "AUDIO");
   } catch (error) {
-    console.error("Error playing audio:", error);
+    errorLog(`Error playing audio: ${error}`, "AUDIO");
   }
 }
 
@@ -52,6 +56,6 @@ export function stopPreset() {
     currentSource.disconnect();
     currentSource = null;
     currentPresetId = null;
-    console.log("Buffer stopped");
+    log("Buffer stopped", "AUDIO");
   }
 }
