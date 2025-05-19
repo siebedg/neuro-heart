@@ -1,8 +1,8 @@
 import { loadAudioBuffer } from "./audioBufferLoader";
 import { getAudioContext } from "./audioContext";
 import { AudioBuffer, AudioBufferSourceNode } from "react-native-audio-api";
-import audioPresets from "./audioPresets";
-import { Zone, HRState, PresetStructure } from "./types/audioPresets";
+import audioPresets from "../presets/audioPresets";
+import { Zone, HRState, PresetStructure } from "../types/audioPresets";
 
 let currentSource: AudioBufferSourceNode | null = null;
 let currentPresetId: string | null = null;
@@ -17,7 +17,8 @@ export async function playPreset(zone: Zone, state: HRState) {
     }
 
     const preset = moodPresets[Math.floor(Math.random() * moodPresets.length)];
-    const url = preset.loopUrls[0]; // Later hier op bpm filteren
+    // const url = preset.loopUrls[0]; // Later hier op bpm filteren
+    const url = "https://software-mansion.github.io/react-native-audio-api/audio/music/example-music-01.mp3";
     console.log(`🎵 Spelen van preset: ${preset.id} (${url})`);
 
     const audioBuffer = await loadAudioBuffer(url);
@@ -45,7 +46,7 @@ export async function playPreset(zone: Zone, state: HRState) {
   }
 }
 
-export function stop() {
+export function stopPreset() {
   if (currentSource) {
     currentSource.stop();
     currentSource.disconnect();

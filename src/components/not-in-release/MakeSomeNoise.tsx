@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Button } from "react-native";
 import { AudioContext } from "react-native-audio-api";
-import { getAudioContext } from "../audio/audioContext";
+import { getAudioContext } from "../../audio/engine/audioContext";
 
 const MakeSomeNoise = () => {
   const handlePlay = async () => {

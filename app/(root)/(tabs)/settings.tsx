@@ -1,7 +1,8 @@
-import MakeSomeNoise from "@/src/components/MakeSomeNoise";
-import TestComponent from "@/src/components/TestComponent";
+import { playSound } from "@/src/audio/simpleAudioPlayer";
+import ClearAudioBuffer from "@/src/components/not-in-release/ClearAudioBuffer";
+import TestComponent from "@/src/components/not-in-release/TestComponent";
 import React from "react";
-import { Text, View } from "react-native";
+import { Button, Text, View } from "react-native";
 
 const Settings = () => {
   return (
@@ -12,8 +13,16 @@ const Settings = () => {
         alignItems: "center",
       }}
     >
-      <MakeSomeNoise />
+      {/* <Button
+        title="Play Sound"
+        onPress={() =>
+          playSound(
+            require("../../../assets/audio/activation/Activation_TooLow_140BPM_440Hz.wav")
+          )
+        }
+      /> */}
       <TestComponent />
+      <ClearAudioBuffer />
       <Text>Settings</Text>
     </View>
   );

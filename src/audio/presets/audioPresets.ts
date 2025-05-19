@@ -1,4 +1,4 @@
-import { PresetStructure } from "./types/audioPresets";
+import { PresetStructure } from "../types/audioPresets";
 
 const audioPresets: PresetStructure = {
   activation: {
@@ -10,9 +10,9 @@ const audioPresets: PresetStructure = {
         loudnessDb: [75, 80],
         tempoStyle: "EDM/DnB",
         loopUrls: [
-          "assets\audio\activation\Activation_TooLow_140BPM_440Hz.wav",
-          "assets\audio\activation\Activation_TooLow_150BPM_440Hz.wav",
-          "assets\audio\activation\Activation_TooLow_180BPM_440Hz.wav",
+          "assets/audio/activation/Activation_TooLow_140BPM_440Hz.wav",
+          "assets/audio/activation/Activation_TooLow_150BPM_440Hz.wav",
+          "assets/audio/activation/Activation_TooLow_180BPM_440Hz.wav",
         ],
         loop: true,
         fadeInMs: 1000,
@@ -33,9 +33,9 @@ const audioPresets: PresetStructure = {
         loudnessDb: [70, 75],
         tempoStyle: "Pop/Rock",
         loopUrls: [
-          "assets\audio\activation\Activation_Optimal_130BPM_435Hz.wav",
-          "assets\audio\activation\Activation_Optimal_135BPM_435Hz.wav",
-          "assets\audio\activation\Activation_Optimal_140BPM_435Hz.wav",
+          "assets/audio/activation/Activation_Optimal_130BPM_435Hz.wav",
+          "assets/audio/activation/Activation_Optimal_135BPM_435Hz.wav",
+          "assets/audio/activation/Activation_Optimal_140BPM_435Hz.wav",
         ],
         loop: true,
         fadeInMs: 1000,
@@ -57,9 +57,9 @@ const audioPresets: PresetStructure = {
         loudnessDb: [65, 70],
         tempoStyle: "Groove",
         loopUrls: [
-          "assets\audio\activation\Activation_TooHigh_110BPM_432Hz.wav",
-          "assets\audio\activation\Activation_TooHigh_115BPM_432Hz.wav",
-          "assets\audio\activation\Activation_TooHigh_120BPM_432Hz.wav",
+          "assets/audio/activation/Activation_TooHigh_110BPM_432Hz.wav",
+          "assets/audio/activation/Activation_TooHigh_115BPM_432Hz.wav",
+          "assets/audio/activation/Activation_TooHigh_120BPM_432Hz.wav",
         ],
         loop: true,
         fadeInMs: 1000,
@@ -82,9 +82,9 @@ const audioPresets: PresetStructure = {
         loudnessDb: [70, 75],
         tempoStyle: "House",
         loopUrls: [
-          "assets\audio\sustained\Sustained_TooLow_1_120BPM_432Hz.wav",
-          "assets\audio\sustained\Sustained_TooLow_2_120BPM_432Hz.wav",
-          "assets\audio\sustained\Sustained_TooLow_120BPM_432Hz.wav",
+          "assets/audio/sustained/Sustained_TooLow_1_120BPM_432Hz.wav",
+          "assets/audio/sustained/Sustained_TooLow_2_120BPM_432Hz.wav",
+          "assets/audio/sustained/Sustained_TooLow_120BPM_432Hz.wav",
         ],
         loop: true,
         fadeInMs: 1000,
@@ -106,9 +106,9 @@ const audioPresets: PresetStructure = {
         loudnessDb: [65, 70],
         tempoStyle: "Lo-fi/Pop",
         loopUrls: [
-          "assets\audio\sustained\Sustained_Optimal_105BPM_432Hz.wav",
-          "assets\audio\sustained\Sustained_Optimal_110BPM_432Hz.wav",
-          "assets\audio\sustained\Sustained_Optimal_115BPM_432Hz.wav",
+          "assets/audio/sustained/Sustained_Optimal_105BPM_432Hz.wav",
+          "assets/audio/sustained/Sustained_Optimal_110BPM_432Hz.wav",
+          "assets/audio/sustained/Sustained_Optimal_115BPM_432Hz.wav",
         ],
         loop: true,
         fadeInMs: 1000,
@@ -129,9 +129,9 @@ const audioPresets: PresetStructure = {
         loudnessDb: [60, 65],
         tempoStyle: "Jazz/Funk",
         loopUrls: [
-          "assets\audio\sustained\Sustained_TooHigh_1_90BPM_432Hz.wav",
-          "assets\audio\sustained\Sustained_TooHigh_90BPM_432Hz.wav",
-          "assets\audio\sustained\Sustained_TooHigh_100BPM_432Hz.wav",
+          "assets/audio/sustained/Sustained_TooHigh_1_90BPM_432Hz.wav",
+          "assets/audio/sustained/Sustained_TooHigh_90BPM_432Hz.wav",
+          "assets/audio/sustained/Sustained_TooHigh_100BPM_432Hz.wav",
         ],
         loop: true,
         fadeInMs: 1000,
@@ -154,9 +154,9 @@ const audioPresets: PresetStructure = {
         loudnessDb: [60, 65],
         tempoStyle: "Light Ambient",
         loopUrls: [
-          "assets\audio\recovery\Recovery_TooLow_1_80BPM_432Hz.wav",
-          "assets\audio\recovery\Recovery_TooLow_2_80BPM_432Hz.wav",
-          "assets\audio\recovery\Recovery_TooLow_80BPM_432Hz.wav",
+          "assets/audio/recovery/Recovery_TooLow_1_80BPM_432Hz.wav",
+          "assets/audio/recovery/Recovery_TooLow_2_80BPM_432Hz.wav",
+          "assets/audio/recovery/Recovery_TooLow_80BPM_432Hz.wav",
         ],
         loop: true,
         fadeInMs: 1000,
@@ -177,9 +177,9 @@ const audioPresets: PresetStructure = {
         loudnessDb: [55, 60],
         tempoStyle: "Drone/Ambient",
         loopUrls: [
-          "assets\audio\recovery\Recovery_Optimal_60BPM_432Hz.wav",
-          "assets\audio\recovery\Recovery_Optimal_65BPM_432Hz.wav",
-          "assets\audio\recovery\Recovery_Optimal_70BPM_432Hz.wav",
+          "assets/audio/recovery/Recovery_Optimal_60BPM_432Hz.wav",
+          "assets/audio/recovery/Recovery_Optimal_65BPM_432Hz.wav",
+          "assets/audio/recovery/Recovery_Optimal_70BPM_432Hz.wav",
         ],
         loop: true,
         fadeInMs: 1000,
@@ -201,9 +201,9 @@ const audioPresets: PresetStructure = {
         loudnessDb: [50, 55],
         tempoStyle: "Breath Cues",
         loopUrls: [
-          "assets\audio\recovery\Recovery_TooHigh_50BPM_430Hz.wav",
-          "assets\audio\recovery\Recovery_TooHigh_55BPM_430Hz.wav",
-          "assets\audio\recovery\Recovery_TooHigh_60BPM_430Hz.wav",
+          "assets/audio/recovery/Recovery_TooHigh_50BPM_430Hz.wav",
+          "assets/audio/recovery/Recovery_TooHigh_55BPM_430Hz.wav",
+          "assets/audio/recovery/Recovery_TooHigh_60BPM_430Hz.wav",
         ],
         loop: true,
         fadeInMs: 1000,
