@@ -6,7 +6,7 @@ import { auth } from "@/src/firebase/config";
 import useAuthStore from "@/src/store/authStore";
 import { useRouter } from "expo-router";
 import useMockHeartRate from "@/src/hooks/hr/useMockHeartRate";
-import { runDemo } from "@/src/utils/hr/hrDemo";
+// import { runDemo } from "@/src/utils/hr/hrDemo";
 
 export default function RootLayout() {
   const setUser = useAuthStore((s) => s.setUser);
@@ -30,9 +30,9 @@ export default function RootLayout() {
     baseHeartRate: 130,
   });
 
-    useEffect(() => {
-      runDemo();
-    }, []);
+    // useEffect(() => {
+    //   runDemo();
+    // }, []);
 
   if (loading) return null; // or splash
 

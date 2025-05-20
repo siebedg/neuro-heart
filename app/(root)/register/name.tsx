@@ -5,6 +5,8 @@ import { router } from "expo-router";
 export default function RegisterNameScreen() {
   const [name, setName] = useState("");
 
+  const isValidName = name.trim().length >= 2;
+
   const handleContinue = () => {
     if (name.trim()) {
       router.push({
@@ -26,7 +28,7 @@ export default function RegisterNameScreen() {
       <Button
         title="Continue"
         onPress={handleContinue}
-        disabled={!name.trim()}
+        disabled={!isValidName}
       />
     </View>
   );

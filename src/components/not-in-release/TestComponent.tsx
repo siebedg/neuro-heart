@@ -1,7 +1,6 @@
 import React from "react";
 // import React, { useEffect } from "react";
 import { View, Button, Text } from "react-native";
-import Slider from "@react-native-community/slider";
 import { useAudioStore } from "../../audio/state/audioStore";
 import { getRandomPreset } from "@/src/audio/presets/presetUtils";
 // import { preloadAllPresets } from "../../audio/engine/audioPreloader";

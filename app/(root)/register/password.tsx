@@ -4,13 +4,15 @@ import { router, useLocalSearchParams } from "expo-router";
 
 export default function RegisterPasswordScreen() {
   const [password, setPassword] = useState("");
-  const { name, email } = useLocalSearchParams();
+  const { name, email, verificationCode } = useLocalSearchParams();
+
+  const isValidPassword = password.trim().length >= 8;
 
   const handleContinue = () => {
     if (password.trim()) {
       router.push({
         pathname: "/register/verify",
-        params: { name, email, password },
+        params: { name, email, password, expectedCode: verificationCode },
       });
     }
   };
@@ -28,8 +30,13 @@ export default function RegisterPasswordScreen() {
       <Button
         title="Continue"
         onPress={handleContinue}
-        disabled={!password.trim()}
+        disabled={!password.trim() || !isValidPassword}
       />
+      {!isValidPassword && password.length > 0 && (
+        <Text style={{ color: "red" }}>
+          Password must be at least 8 characters
+        </Text>
+      )}
     </View>
   );
 }

@@ -10,6 +10,7 @@ export default {
     icon: "./assets/images/icon.png",
     scheme: "neuro-heart",
     userInterfaceStyle: "automatic",
+    assetBundlePatterns: ["**/*"],
     newArchEnabled: true,
     ios: {
       supportsTablet: true,
@@ -49,5 +50,7 @@ export default {
       FIREBASE_MESSAGING_SENDER_ID: process.env.FIREBASE_MESSAGING_SENDER_ID,
       FIREBASE_APP_ID: process.env.FIREBASE_APP_ID,
     },
+    
   },
 };
+

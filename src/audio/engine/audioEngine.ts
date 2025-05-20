@@ -19,7 +19,7 @@ export async function playPreset(
 
     // const url = preset.selectedLoop;
     const url =
-      "https://software-mansion.github.io/react-native-audio-api/audio/music/example-music-01.mp3";
+      "assets/audio/activation/Activation_TooLow_140BPM_440Hz.wav";
     log(`Playing preset: ${preset.id} met loop: ${url}`, "AUDIO");
 
     const audioBuffer = await loadAudioBuffer(url);
