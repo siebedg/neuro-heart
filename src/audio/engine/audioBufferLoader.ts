@@ -1,29 +1,29 @@
 import { log, errorLog } from "../../utils/log.util";
 import { getAudioContext } from "./audioContext";
 import { AudioBuffer } from "react-native-audio-api";
-import * as FileSystem from "expo-file-system";
+import { Asset } from "expo-asset";
+import { audioAssetMap } from "../presets/audioAssets"; 
 
 const bufferCache = new Map<string, AudioBuffer>();
 
-export async function loadAudioBuffer(url: string): Promise<AudioBuffer> {
-  if (bufferCache.has(url)) {
-    log(`Buffer loaded from cache: ${url}`, "BUFFER");
-    return bufferCache.get(url)!;
+export async function loadAudioBuffer(key: string): Promise<AudioBuffer> {
+  if (bufferCache.has(key)) {
+    log(`Buffer loaded from cache: ${key}`, "BUFFER");
+    return bufferCache.get(key)!;
   }
   try {
-    // Buffer not in cache, load it
     const audioContext = getAudioContext();
-    const audioBuffer = await FileSystem.downloadAsync(
-      url,
-      `${FileSystem.documentDirectory}/${url}`
-    ).then(({ uri }) => audioContext.decodeAudioDataSource(uri));
 
-    // Save buffer to cache
-    bufferCache.set(url, audioBuffer);
-    log(`✅ Buffer coded and added to cache: ${url}`, "BUFFER");
+    const assetModule = audioAssetMap[key];
+    const asset = Asset.fromModule(assetModule);
+    await asset.downloadAsync();
+
+    const audioBuffer = await audioContext.decodeAudioDataSource(asset.localUri!);
+    bufferCache.set(key, audioBuffer);
+    log(`✅ Buffer coded and cached: ${key}`, "BUFFER");
     return audioBuffer;
   } catch (error) {
-    errorLog(`Error loading buffer: ${url} - ${error}`, "BUFFER");
+    errorLog(`Error loading buffer: ${key} - ${error}`, "BUFFER");
     throw error;
   }
 }

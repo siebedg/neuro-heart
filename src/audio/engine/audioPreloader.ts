@@ -18,3 +18,13 @@ export async function preloadAllPresets() {
   }
   log("All presets preloaded", "PRELOADER");
 }
+
+export async function preloadZone(zone: Zone, state: HRState) {
+  const preset = getRandomPreset(zone, state);
+  if (preset) {
+    for (const loop of preset.loopUrls) {
+      await loadAudioBuffer(loop.url);
+    }
+  }
+}
+

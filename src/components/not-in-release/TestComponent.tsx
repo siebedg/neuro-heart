@@ -1,32 +1,41 @@
-import React from "react";
-// import React, { useEffect } from "react";
-import { View, Button, Text } from "react-native";
+import React, { useState } from "react";
+import { View, Button, Text, ActivityIndicator } from "react-native";
 import { useAudioStore } from "../../audio/state/audioStore";
-import { getRandomPreset } from "@/src/audio/presets/presetUtils";
-// import { preloadAllPresets } from "../../audio/engine/audioPreloader";
+import { preloadZone } from "@/src/audio/engine/audioPreloader";
 
 export default function App() {
   const { play, stop, isPlaying } = useAudioStore();
+  const [loading, setLoading] = useState(false);
 
-  // useEffect(() => {
-  //     // Preload all presets on app launch
-  //     preloadAllPresets();
-  // }, []);
+  const handleSession = async () => {
+    setLoading(true);
+    const start = Date.now();
+
+    await preloadZone("activation", "tooLow");
+
+    const elapsed = Date.now() - start;
+    const minDelay = 2000;
+    if (elapsed < minDelay) {
+      await new Promise((res) => setTimeout(res, minDelay - elapsed));
+    }
+
+    setLoading(false);
+    play("activation", "tooLow");
+  };
 
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Button
-        title={isPlaying ? "Stop" : "Play"}
-        onPress={() => (isPlaying ? stop() : play("activation", "tooLow"))}
-      />
-      <Button
-        title="Get random preset"
-        onPress={() => getRandomPreset("activation", "tooLow")}
-      />
-      <Button
-        title="Get random preset 155"
-        onPress={() => getRandomPreset("activation", "tooLow", [155, 200])}
-      />
+      {loading ? (
+        <>
+          <ActivityIndicator size="large" color="#1A4D2E" />
+          <Text style={{ marginTop: 10 }}>Analyzing heart rate…</Text>
+        </>
+      ) : (
+        <Button
+          title={isPlaying ? "Stop" : "Start sessie"}
+          onPress={isPlaying ? stop : handleSession}
+        />
+      )}
     </View>
   );
 }

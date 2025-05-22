@@ -17,9 +17,7 @@ export async function playPreset(
     const preset = getRandomPreset(zone, state, bpmRange);
     if (!preset || !preset.selectedLoop) return;
 
-    // const url = preset.selectedLoop;
-    const url =
-      "assets/audio/activation/Activation_TooLow_140BPM_440Hz.wav";
+    const url = preset.selectedLoop;
     log(`Playing preset: ${preset.id} met loop: ${url}`, "AUDIO");
 
     const audioBuffer = await loadAudioBuffer(url);
