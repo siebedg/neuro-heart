@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { View, Button, Text, ActivityIndicator } from "react-native";
-import { useAudioStore } from "../../audio/state/audioStore";
+import { useAudioStore } from "../../audio/store/audioStore";
 import { preloadZone } from "@/src/audio/engine/audioPreloader";
+import useBLEHeartRate from "@/src/hooks/hr/useBLEHeartRate";
 
 export default function App() {
+  useBLEHeartRate();
+
   const { play, stop, isPlaying } = useAudioStore();
   const [loading, setLoading] = useState(false);
 

@@ -4,7 +4,7 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
 export async function logHeartRateToFirestore(
     hr: number,
-    source: "mock" | "wearos" | "googleFit",
+    source: "mock" | "wearos" | "googleFit" | "viiiiva",
     sessionId?: string
   ) {
     const user = auth.currentUser;

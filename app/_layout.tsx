@@ -25,10 +25,10 @@ export default function RootLayout() {
   }, []);
 
   // Hartslagmock wanneer geen wearable
-  useMockHeartRate({
-    useSmoothing: true,
-    baseHeartRate: 130,
-  });
+  // useMockHeartRate({
+  //   useSmoothing: true,
+  //   baseHeartRate: 130,
+  // });
 
     // useEffect(() => {
     //   runDemo();
