@@ -4,11 +4,11 @@ export default {
   expo: {
     name: "neuro-heart",
     slug: "neuro-heart",
-    owner: "neuro-heart",
+    owner: "jojoh",
     version: "1.0.0",
     orientation: "portrait",
     icon: "./assets/images/icon.png",
-    scheme: "neuro-heart",
+    scheme: "com.neuroheart.neuroheart",
     userInterfaceStyle: "automatic",
     assetBundlePatterns: ["**/*"],
     newArchEnabled: true,
@@ -49,8 +49,9 @@ export default {
       FIREBASE_STORAGE_BUCKET: process.env.FIREBASE_STORAGE_BUCKET,
       FIREBASE_MESSAGING_SENDER_ID: process.env.FIREBASE_MESSAGING_SENDER_ID,
       FIREBASE_APP_ID: process.env.FIREBASE_APP_ID,
+      eas: {
+        projectId: "6891b6ad-3347-4a2f-8462-ac0f6871baf2",
+      },
     },
-    
   },
 };
-
