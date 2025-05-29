@@ -4,7 +4,6 @@ import { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
 import { Link, router } from "expo-router";
 import { useGoogleAuth } from "@/src/firebase/google_auth";
-import { FontAwesome } from "@expo/vector-icons";
 import GoogleIcon from "@/src/components/GoogleIcon";
 
 export default function LoginScreen() {

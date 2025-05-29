@@ -30,7 +30,7 @@ export async function playPreset(
       currentSource.disconnect();
       log("Current buffer stopped", "AUDIO");
     }
-    stopBinauralBeats();
+    // stopBinauralBeats();
 
     // Maak een nieuwe AudioBufferSourceNode aan
     const source = audioContext.createBufferSource();
@@ -48,7 +48,7 @@ export async function playPreset(
       const beatFreq = (preset.brainwaveHz[0] + preset.brainwaveHz[1]) / 2;
       const baseFreq = 440; // of random tussen 420–460 als je wil variatie
 
-      startBinauralBeats(baseFreq, baseFreq + beatFreq);
+      // startBinauralBeats(baseFreq, baseFreq + beatFreq);
       log(`Started binaural: ${baseFreq}Hz + ${beatFreq}Hz`, "AUDIO");
     }
   } catch (error) {

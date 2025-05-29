@@ -11,23 +11,6 @@ const Settings = () => {
         alignItems: "center",
       }}
     >
-      <Text
-        style={{
-          fontSize: 20,
-          fontWeight: "bold",
-          color: "white",
-          marginBottom: 20,
-          textAlign: "center",
-          marginTop: 20,
-          marginHorizontal: 20,
-          backgroundColor: "teal",
-          padding: 10,
-          borderRadius: 2,
-          fontFamily: "Poppins-Bold",
-        }}
-      >
-        Settings
-      </Text>
       <TestComponent />
     </View>
   );

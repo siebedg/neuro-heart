@@ -7,7 +7,7 @@ type AuthState = {
 };
 
 const useAuthStore = create<AuthState>((set) => ({
-  user: null,
+  user: undefined,
   setUser: (user) => set({ user }),
 }));
 
