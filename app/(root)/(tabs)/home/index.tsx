@@ -17,13 +17,11 @@ function Index() {
       <Text className="text-5xl font-bold text-cyan-600 mb-8 tracking-tight">
         Cortune
       </Text>
-      <Text> {"\n"}</Text>
-      <Text className="text-xl">Current heartrate: {hr}</Text>
-      <Text> {"\n"}</Text>
+
+      <HeartRateGraph />
       <Link className="text-xl text-sky-600 underline" href="/home/nested-home">
         Nested Home
       </Link>
-      <HeartRateGraph />
     </View>
   );
 }

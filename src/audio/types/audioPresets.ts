@@ -15,7 +15,7 @@ type VolumeRange = [number, number]; // in dB
 type FrequencyRange = [number, number]; // in Hz
 type BrainwaveRange = [number, number]; // in Hz
 
-type BinauralConfig = {
+export type BinauralConfig = {
   carrierHz: number; // hoofdtoon, bv. 440 Hz
   beatHz: number; // verschil tussen L/R oor, bv. 6 Hz → theta
   durationMs?: number; // optioneel: hoelang de binaural actief moet blijven
