@@ -16,7 +16,7 @@ const HR_CHARACTERISTIC_UUID = "2a37";
 
 const manager = new BleManager();
 
-export default function useBLEHeartRate() {
+export default function useBLEHeartRate(deviceKeyword: string) {
   const { sessionId } = useSessionManager();
   const setHr = useHeartRateStore((s) => s.setHr);
   const addHrToHistory = useHeartRateStore((s) => s.addHrToHistory);
@@ -28,13 +28,15 @@ export default function useBLEHeartRate() {
   const subscriptionRef = useRef<Subscription | null>(null);
 
   useEffect(() => {
+    if (!deviceKeyword || deviceKeyword.length < 2) return;
+
     resetHeartRateSmoothing();
 
     const scanAndConnect = async () => {
       const granted = await requestBLEPermissions();
       if (!granted) return;
 
-      log("🔍 Scanning for Viiiiva HRM...", "BLE");
+      log("🔍 Scanning for HRM...", "BLE");
 
       manager.startDeviceScan(null, null, async (error, device) => {
         if (error) {
@@ -42,7 +44,7 @@ export default function useBLEHeartRate() {
           return;
         }
 
-        if (device?.name?.toLowerCase().includes("viiiiva")) {
+        if (device?.name?.toLowerCase().includes(deviceKeyword)) {
           log(`✅ Found device: ${device.name}`, "BLE");
           manager.stopDeviceScan();
 
@@ -52,7 +54,7 @@ export default function useBLEHeartRate() {
             log(`🔗 Connected to ${device.name}`, "BLE");
 
             deviceRef.current?.onDisconnected((error) => {
-              errorLog("❌ Viiiiva disconnected, retrying scan...", "BLE");
+              errorLog("❌ HRM disconnected, retrying scan...", "BLE");
               scanAndConnect();
             });
 
@@ -89,7 +91,11 @@ export default function useBLEHeartRate() {
                   zone: zoneInfo,
                 });
 
-                logHeartRateToFirestore(hrValue, "viiiiva", sessionId ?? undefined);
+                logHeartRateToFirestore(
+                  hrValue,
+                  deviceKeyword,
+                  sessionId ?? undefined
+                );
               }
             );
 
@@ -108,5 +114,5 @@ export default function useBLEHeartRate() {
       deviceRef.current?.cancelConnection();
       log("🔌 BLE connection cleaned up", "BLE");
     };
-  }, []);
+  }, [deviceKeyword]);
 }
