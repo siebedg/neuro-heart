@@ -7,7 +7,7 @@ export default {
     owner: "jojoh",
     version: "1.0.0",
     orientation: "portrait",
-    icon: "./assets/images/icon.png",
+    icon: "./assets/images/latest-icon.png",
     scheme: "com.neuroheart.neuroheart",
     userInterfaceStyle: "automatic",
     assetBundlePatterns: ["**/*"],
@@ -18,9 +18,15 @@ export default {
     android: {
       package: "com.neuroheart.neuroheart",
       adaptiveIcon: {
-        foregroundImage: "./assets/images/adaptive-icon.png",
+        foregroundImage: "./assets/images/latest-icon.png",
         backgroundColor: "#ffffff",
       },
+    },
+    androidStatusBar: {
+      barStyle: "light-content",
+      // dont show
+      translucent: false,
+      hidden: true
     },
     web: {
       bundler: "metro",
@@ -32,10 +38,10 @@ export default {
       [
         "expo-splash-screen",
         {
-          image: "./assets/images/splash-icon.png",
+          image: "./assets/images/splash.png",
           imageWidth: 200,
-          resizeMode: "contain",
-          backgroundColor: "#ffffff",
+          resizeMode: "cover",
+          backgroundColor: "#432765",
         },
       ],
     ],

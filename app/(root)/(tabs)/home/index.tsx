@@ -1,7 +1,6 @@
-import HeartRateGraph from "@/src/components/HeartRateGraph";
 import useHeartRateStore from "@/src/store/heartRateStore";
 import { Link } from "expo-router";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 
 function Index() {
   const hr = useHeartRateStore((state) => state.hr);
@@ -14,11 +13,7 @@ function Index() {
         alignItems: "center",
       }}
     >
-      <Text className="text-5xl font-bold text-cyan-600 mb-8 tracking-tight">
-        Cortune
-      </Text>
 
-      <HeartRateGraph />
       <Link className="text-xl text-sky-600 underline" href="/home/nested-home">
         Nested Home
       </Link>

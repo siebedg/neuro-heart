@@ -1,14 +1,21 @@
 import { auth } from "@/src/firebase/config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  ImageBackground,
+} from "react-native";
 import { Link, router } from "expo-router";
 import { useGoogleAuth } from "@/src/firebase/google_auth";
 import GoogleIcon from "@/src/components/GoogleIcon";
+import { FontAwesome } from "@expo/vector-icons";
 
 export default function LoginScreen() {
   const { handleGoogleLogin } = useGoogleAuth();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -16,53 +23,79 @@ export default function LoginScreen() {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       Alert.alert("Success", "Logged in!");
-      router.replace("/"); // instantly navigates to index.tsx
+      router.replace("/");
     } catch (err: any) {
       Alert.alert("Login error", err.message);
     }
   };
 
   return (
-    <View className="flex-1 items-center justify-center px-4 bg-white">
-      <Text className="text-2xl font-semibold mb-8 text-gray-800">
-        Welcome to Cortune
-      </Text>
-      <TextInput
-        className="border border-gray-200 w-full p-4 mb-3 rounded-lg bg-gray-50"
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-      />
-      <TextInput
-        className="border border-gray-200 w-full p-4 mb-6 rounded-lg bg-gray-50"
-        placeholder="Password"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
-
-      {/* Google Login Button */}
-      <TouchableOpacity
-        onPress={handleGoogleLogin}
-        className="flex-row items-center justify-center w-full py-3 mb-4 bg-white border border-gray-300 rounded-lg"
-      >
-        <GoogleIcon size={20} />
-        <Text className="ml-2 text-sm font-medium text-gray-800">
-          Continue with Google
+    <ImageBackground
+      source={require("@/assets/images/background.png")}
+      className="flex-1 justify-center items-center px-6"
+      resizeMode="cover"
+    >
+      <View className="w-full max-w-sm">
+        <Text className="text-white text-[32px] font-bold text-center mb-1">
+          Welcome back
         </Text>
-      </TouchableOpacity>
+        <Text className="text-gray-300 text-center text-[20px] mb-10">
+          Sign in to your Cortune account
+        </Text>
 
-      {/* Regular Login Button */}
-      <TouchableOpacity
-        onPress={login}
-        className="w-full bg-cyan-600 p-4 rounded-lg mb-4"
-      >
-        <Text className="text-white text-center font-medium">Sign In</Text>
-      </TouchableOpacity>
+        {/* Unified form container */}
+        <View className="bg-white/10 rounded-3xl mb-6 overflow-hidden">
+          <TextInput
+            className="text-white px-4 py-8 text-lg"
+            placeholder="Email"
+            placeholderTextColor="#bbb"
+            value={email}
+            onChangeText={setEmail}
+            autoCapitalize="none"
+          />
+          <View className="h-[2px] bg-[#2e1448]/50" />
+          <TextInput
+            className="text-white px-4 py-10 text-lg"
+            placeholder="Password"
+            placeholderTextColor="#bbb"
+            secureTextEntry
+            value={password}
+            onChangeText={setPassword}
+          />
+        </View>
 
-      <Link href="/register/name" className="text-cyan-600 mt-4">
-        Don't have an account? Register
-      </Link>
-    </View>
+        <TouchableOpacity className="mb-10 mt-4">
+          <Text className="text-lg text-center text-gray-300">
+            Forgot password?
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={login}
+          className="bg-white py-4 rounded-full mb-8"
+        >
+          <Text className="text-black text-center font-semibold text-base">
+            SIGN IN
+          </Text>
+        </TouchableOpacity>
+
+        {/* OR Divider */}
+        <View className="flex-row items-center justify-center mb-6">
+          <View className="h-px flex-1 bg-white/20" />
+          <Text className="mx-4 text-white/60">OR</Text>
+          <View className="h-px flex-1 bg-white/20" />
+        </View>
+
+        {/* Full-width social buttons */}
+        <View className="space-y-4">
+          <TouchableOpacity
+            onPress={handleGoogleLogin}
+            className="bg-white/10 py-4 rounded-full w-full flex-row justify-center items-center"
+          >
+            <GoogleIcon size={24} />
+          </TouchableOpacity>
+        </View>
+      </View>
+    </ImageBackground>
   );
 }

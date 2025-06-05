@@ -1,9 +1,10 @@
 import "./global.css";
-import { Stack } from "expo-router";
+import { Slot, Stack } from "expo-router";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { auth } from "@/src/firebase/config";
 import useAuthStore from "@/src/store/authStore";
+import { ImageBackground, StyleSheet } from "react-native";
 // import useMockHeartRate from "@/src/hooks/hr/useMockHeartRate";
 
 export default function RootLayout() {
@@ -26,6 +27,19 @@ export default function RootLayout() {
   // useEffect(() => {
   //   runDemo();
   // }, []);
-
-  return <Stack screenOptions={{ headerShown: false }} />;
+  return (
+    <ImageBackground
+      source={require("../assets/images/background.png")}
+      style={styles.bg}
+    >
+      <Slot />
+    </ImageBackground>
+  );
 }
+
+const styles = StyleSheet.create({
+  bg: {
+    flex: 1,
+    resizeMode: "cover",
+  },
+});

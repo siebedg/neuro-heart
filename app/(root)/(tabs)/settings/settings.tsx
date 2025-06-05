@@ -1,6 +1,6 @@
 import TestComponent from "@/src/components/not-in-release/TestComponent";
 import React from "react";
-import { Button, Text, View } from "react-native";
+import { View } from "react-native";
 
 const Settings = () => {
   return (
