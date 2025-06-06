@@ -1,4 +1,4 @@
-import { Slot, Tabs } from "expo-router";
+import { Tabs } from "expo-router";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
@@ -13,6 +13,7 @@ export default function TabLayout() {
       <Tabs
         screenOptions={{
           tabBarActiveTintColor: "#ffffff",
+          tabBarShowLabel: false,
           tabBarStyle: {
             backgroundColor: "transparent",
             borderTopWidth: 0,
@@ -26,31 +27,52 @@ export default function TabLayout() {
           options={{
             title: "Home",
             headerTransparent: true,
+            headerShown: false,
             headerStyle: {
               backgroundColor: "transparent",
-              elevation: 0, 
-              shadowOpacity: 0, 
+              elevation: 0,
+              shadowOpacity: 0,
             },
             headerTitleStyle: {
-              color: "#fff", 
+              color: "#fff",
             },
             tabBarIcon: ({ color, size }) => (
-              <FontAwesome size={size} name="home" color={color} />
+              <Ionicons size={size} name="home-sharp" color={color} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="player"
+          options={{
+            title: "Player",
+            headerTransparent: true,
+            headerShown: false,
+            headerStyle: {
+              backgroundColor: "transparent",
+              elevation: 0,
+              shadowOpacity: 0,
+            },
+            headerTitleStyle: {
+              color: "#fff",
+            },
+            tabBarIcon: ({ color, size }) => (
+              <FontAwesome name="music" size={size} color={color} />
             ),
           }}
         />
         <Tabs.Screen
           name="profile"
-           options={{
+          options={{
             title: "Profile",
             headerTransparent: true,
+            headerShown: false,
             headerStyle: {
               backgroundColor: "transparent",
-              elevation: 0, 
-              shadowOpacity: 0, 
+              elevation: 0,
+              shadowOpacity: 0,
             },
             headerTitleStyle: {
-              color: "#fff", 
+              color: "#fff",
             },
             tabBarIcon: ({ color, size }) => (
               <FontAwesome5 name="user-alt" size={size} color={color} />
@@ -62,13 +84,14 @@ export default function TabLayout() {
           options={{
             title: "Settings",
             headerTransparent: true,
+            headerShown: false,
             headerStyle: {
               backgroundColor: "transparent",
-              elevation: 0, 
-              shadowOpacity: 0, 
+              elevation: 0,
+              shadowOpacity: 0,
             },
             headerTitleStyle: {
-              color: "#fff", 
+              color: "#fff",
             },
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="settings-sharp" size={size} color={color} />

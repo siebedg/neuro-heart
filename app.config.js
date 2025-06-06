@@ -24,9 +24,7 @@ export default {
     },
     androidStatusBar: {
       barStyle: "light-content",
-      // dont show
-      translucent: false,
-      hidden: true
+      translucent: true,
     },
     web: {
       bundler: "metro",

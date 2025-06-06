@@ -46,7 +46,7 @@ export default function LoginScreen() {
         {/* Unified form container */}
         <View className="bg-white/10 rounded-3xl mb-6 overflow-hidden">
           <TextInput
-            className="text-white px-4 py-8 text-lg"
+            className="text-white px-4 py-6 text-lg"
             placeholder="Email"
             placeholderTextColor="#bbb"
             value={email}
@@ -55,7 +55,7 @@ export default function LoginScreen() {
           />
           <View className="h-[2px] bg-[#2e1448]/50" />
           <TextInput
-            className="text-white px-4 py-10 text-lg"
+            className="text-white px-4 py-6 text-lg"
             placeholder="Password"
             placeholderTextColor="#bbb"
             secureTextEntry
@@ -64,7 +64,7 @@ export default function LoginScreen() {
           />
         </View>
 
-        <TouchableOpacity className="mb-10 mt-4">
+        <TouchableOpacity className="mb-8">
           <Text className="text-lg text-center text-gray-300">
             Forgot password?
           </Text>
@@ -94,6 +94,12 @@ export default function LoginScreen() {
           >
             <GoogleIcon size={24} />
           </TouchableOpacity>
+         <TouchableOpacity onPress={() => router.push("/register" as any)}>
+  <Text className="text-gray-300 mt-6 text-center">
+    Don't have an account? Register
+  </Text>
+</TouchableOpacity>
+
         </View>
       </View>
     </ImageBackground>

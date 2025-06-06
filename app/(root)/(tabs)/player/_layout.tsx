@@ -1,7 +1,7 @@
 import { Slot } from "expo-router";
 import { ImageBackground, StyleSheet } from "react-native";
 
-export default function ProfileLayout() {
+export default function PlayerLayout() {
   return (
     <ImageBackground
       source={require("../../../../assets/images/background.png")}

@@ -8,7 +8,7 @@ export default function SettingsLayout() {
       style={styles.bg}
       resizeMode="cover"
     >
-      <Slot />
+      <Slot screenOptions={{ headerShown: false }} />
     </ImageBackground>
   );
 }

@@ -7,7 +7,7 @@ export default function HomeLayout() {
       source={require("../../../../assets/images/background.png")}
       style={styles.bg}
     >
-      <Slot />
+      <Slot screenOptions={{ headerShown: false }} />
     </ImageBackground>
   );
 }
