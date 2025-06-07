@@ -94,12 +94,11 @@ export default function LoginScreen() {
           >
             <GoogleIcon size={24} />
           </TouchableOpacity>
-         <TouchableOpacity onPress={() => router.push("/register" as any)}>
-  <Text className="text-gray-300 mt-6 text-center">
-    Don't have an account? Register
-  </Text>
-</TouchableOpacity>
-
+          <TouchableOpacity onPress={() => router.push("/register" as any)}>
+            <Text className="text-gray-300 mt-6 text-center">
+              Don't have an account? Register
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
     </ImageBackground>

@@ -1,38 +1,66 @@
 import { auth } from "@/src/firebase/config";
+import { signOut } from "firebase/auth";
 import useAuthStore from "@/src/store/authStore";
 import { router } from "expo-router";
-import { signOut } from "firebase/auth";
 import React from "react";
-import { View, Text, Button } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  ImageBackground,
+  Alert,
+} from "react-native";
 
 const handleLogout = async () => {
   try {
     await signOut(auth);
+    // router.replace("/launch/intro");
     router.replace("/login");
-  } catch (err) {
-    console.error("Logout error:", err);
+  } catch (err: any) {
+    Alert.alert("Logout error", err.message);
   }
 };
 
-const Profile = () => {
+export default function ProfileScreen() {
   const user = useAuthStore((s) => s.user);
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
+    <ImageBackground
+      source={require("@/assets/images/background.png")}
+      className="flex-1 justify-center items-center px-6"
+      resizeMode="cover"
     >
-      <Text className="text-xl">Logged in as:</Text>
-      <Text className="text-lg text-cyan-600 mt-2">
-        {user?.email ?? "Unknown"}
-      </Text>
-      <Text> {"\n"}</Text>
-      <Button title="Logout" onPress={handleLogout} color="#0891b2" />
-    </View>
-  );
-};
+      <View className="w-full max-w-sm items-center">
+        <Text className="text-white text-[32px] font-bold text-center mb-10">
+          Your Profile
+        </Text>
+        {/* Profile Card */}
+        <View className="bg-white/10 rounded-3xl p-6 items-center mb-8 w-full">
+          <Image
+            source={{
+              uri: "https://i.pravatar.cc/150?img=7"
+            }}
+            className="w-24 h-24 rounded-full mb-4"
+          />
+          <Text className="text-white text-xl font-semibold">
+            {user?.email ?? "Unknown User"}
+          </Text>
+          <Text className="text-gray-300 mt-1">Joined: Mar 2025</Text>
+          <View className="h-[1px] bg-white/20 w-full my-4" />
+          <Text className="text-white text-base mb-1">Plan: Free Tier</Text>
+        </View>
 
-export default Profile;
+        {/* Logout Button */}
+        <TouchableOpacity
+          onPress={handleLogout}
+          className="bg-white py-4 rounded-full w-full"
+        >
+          <Text className="text-black text-center font-semibold text-base">
+            Log out
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </ImageBackground>
+  );
+}
