@@ -9,10 +9,9 @@ import {
   Alert,
   ImageBackground,
 } from "react-native";
-import { Link, router } from "expo-router";
+import { router } from "expo-router";
 import { useGoogleAuth } from "@/src/firebase/google_auth";
 import GoogleIcon from "@/src/components/GoogleIcon";
-import { FontAwesome } from "@expo/vector-icons";
 
 export default function LoginScreen() {
   const { handleGoogleLogin } = useGoogleAuth();
@@ -23,7 +22,7 @@ export default function LoginScreen() {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       Alert.alert("Success", "Logged in!");
-      router.replace("/");
+      router.replace("/player");
     } catch (err: any) {
       Alert.alert("Login error", err.message);
     }

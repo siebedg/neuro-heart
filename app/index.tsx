@@ -13,7 +13,7 @@ export default function Index() {
       if (user === undefined) return; 
 
       if (user) {
-        setInitialRoute("/(root)/(tabs)/home");
+        setInitialRoute("/(root)/(tabs)/player");
       } else {
         const seen = await hasSeenOnboarding();
         setInitialRoute(seen ? "/(root)/(auth)/login" : "/launch/intro");

@@ -48,13 +48,12 @@ const MomentScreen = () => {
       className="flex-1 px-6 py-12"
     >
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <Text className="text-green-400 text-sm text-center mb-2">
-          “Let us tune your audio to your performance moments.”
+        <Text className="text-white text-3xl font-bold text-center mt-40">
+          When do you want audio to
+        </Text>{" "}
+        <Text className="text-white text-3xl font-bold text-center mb-8">
+          guide your performance?{" "}
         </Text>
-        <Text className="text-white text-2xl font-bold text-center mb-8">
-          When do you want audio to guide your performance?
-        </Text>
-
         <View className="space-y-4 mb-8">
           {primaryOptions.map((option) => {
             const selected = selectedKey === option.key;
@@ -62,7 +61,7 @@ const MomentScreen = () => {
               <TouchableOpacity
                 key={option.key}
                 onPress={() => setSelectedKey(option.key)}
-                className={`flex-row items-center p-4 rounded-xl border ${
+                className={`flex-row mt-4 items-center p-4 rounded-xl border ${
                   selected
                     ? "bg-white/20 border-white"
                     : "bg-white/10 border-white/20"
@@ -81,25 +80,18 @@ const MomentScreen = () => {
             );
           })}
         </View>
-
-        <Text className="text-green-400 text-sm mb-4">
-          To stay focused while working{"\n"}
-          Before an intense workout{"\n"}
-          To recover after training{"\n"}
-          To calm my nervous system{"\n"}
-          Other
-        </Text>
-
         <TouchableOpacity
           onPress={handleContinue}
           disabled={!selectedKey}
-          className={`mt-auto py-4 rounded-full ${
-            selectedKey ? "bg-white" : "bg-white/20"
+          className={`mt-auto py-4 px-8 rounded-full border ${
+            selectedKey
+              ? "bg-white/10 border-white/30"
+              : "bg-white/5 border-white/10"
           }`}
         >
           <Text
-            className={`text-center font-semibold text-base ${
-              selectedKey ? "text-black" : "text-white/50"
+            className={`text-center text-lg font-semibold ${
+              selectedKey ? "text-white" : "text-white/50"
             }`}
           >
             Continue

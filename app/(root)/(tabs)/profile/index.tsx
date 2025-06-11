@@ -11,11 +11,12 @@ import {
   ImageBackground,
   Alert,
 } from "react-native";
+import { resetOnboarding } from "@/src/utils/onboardingStorage";
+import { Ionicons } from "@expo/vector-icons";
 
 const handleLogout = async () => {
   try {
     await signOut(auth);
-    // router.replace("/launch/intro");
     router.replace("/login");
   } catch (err: any) {
     Alert.alert("Logout error", err.message);
@@ -31,15 +32,30 @@ export default function ProfileScreen() {
       className="flex-1 justify-center items-center px-6"
       resizeMode="cover"
     >
+      <TouchableOpacity
+        onPress={() => router.push("/settings")}
+        style={{
+          position: "absolute",
+          top: 50,
+          right: 20,
+          zIndex: 10,
+        }}
+      >
+        <Ionicons name="settings-sharp" size={24} color="white" />
+      </TouchableOpacity>
+
       <View className="w-full max-w-sm items-center">
-        <Text className="text-white text-[32px] font-bold text-center mb-10">
-          Your Profile
-        </Text>
+        <TouchableOpacity onPress={() => resetOnboarding()}>
+          <Text className="text-red-500 text-[32px] font-bold text-center mb-10">
+            Reset
+          </Text>
+        </TouchableOpacity>
+       
         {/* Profile Card */}
         <View className="bg-white/10 rounded-3xl p-6 items-center mb-8 w-full">
           <Image
             source={{
-              uri: "https://i.pravatar.cc/150?img=7"
+              uri: "https://picsum.photos/id/237/200/300",
             }}
             className="w-24 h-24 rounded-full mb-4"
           />

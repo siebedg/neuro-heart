@@ -9,6 +9,7 @@ import {
   FIREBASE_PROJECT_ID,
   FIREBASE_STORAGE_BUCKET,
 } from "./constants";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: FIREBASE_API_KEY,
@@ -24,4 +25,7 @@ const auth = initializeAuth(app, {
   persistence: getReactNativePersistence(AsyncStorage),
 });
 
-export { app, auth };
+const db = getFirestore(app);
+
+
+export { app, db, auth };

@@ -15,7 +15,7 @@ export default function RegisterNameScreen() {
   const handleContinue = () => {
     if (isValidName) {
       router.push({
-        pathname: "/register/email",
+        pathname: "/register/age",
         params: { name },
       });
     }

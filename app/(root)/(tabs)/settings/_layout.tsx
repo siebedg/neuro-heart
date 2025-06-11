@@ -1,4 +1,4 @@
-import { Slot } from "expo-router";
+import { Slot, Stack } from "expo-router";
 import { ImageBackground, StyleSheet } from "react-native";
 
 export default function SettingsLayout() {
@@ -10,6 +10,7 @@ export default function SettingsLayout() {
     >
       <Slot screenOptions={{ headerShown: false }} />
     </ImageBackground>
+    
   );
 }
 

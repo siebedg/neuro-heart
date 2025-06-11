@@ -1,14 +1,18 @@
-import { getFirestore, doc, setDoc } from "firebase/firestore";
-import { db } from "../firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../firebase/config";
 
 export const saveOnboardingDataToFirebase = async (
   uid: string,
-  data: {
+    data: {
     useCase: string | null;
     intent: string | null;
     name: string;
+    age: number;
+    fitnessLevel: string;
     neuralEffect: number;
     complexity: number;
+    genres: number;
+    activities: number;
   }
 ) => {
   try {

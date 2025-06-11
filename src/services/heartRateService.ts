@@ -1,5 +1,4 @@
-import { db } from "@/src/firebase/firestore";
-import { auth } from "../firebase/config";
+import { auth, db } from "../firebase/config";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
 export async function logHeartRateToFirestore(

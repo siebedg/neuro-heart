@@ -63,17 +63,7 @@ export default function TabLayout() {
         <Tabs.Screen
           name="profile"
           options={{
-            title: "Profile",
-            headerTransparent: true,
-            headerShown: false,
-            headerStyle: {
-              backgroundColor: "transparent",
-              elevation: 0,
-              shadowOpacity: 0,
-            },
-            headerTitleStyle: {
-              color: "#fff",
-            },
+            headerShown: false, // ✅ zet dit op false voor custom UI
             tabBarIcon: ({ color, size }) => (
               <FontAwesome5 name="user-alt" size={size} color={color} />
             ),
@@ -81,22 +71,7 @@ export default function TabLayout() {
         />
         <Tabs.Screen
           name="settings"
-          options={{
-            title: "Settings",
-            headerTransparent: true,
-            headerShown: false,
-            headerStyle: {
-              backgroundColor: "transparent",
-              elevation: 0,
-              shadowOpacity: 0,
-            },
-            headerTitleStyle: {
-              color: "#fff",
-            },
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name="settings-sharp" size={size} color={color} />
-            ),
-          }}
+          options={{ headerShown: false, href: null }}
         />
         <Tabs.Screen
           name="index"

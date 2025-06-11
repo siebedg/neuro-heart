@@ -1,5 +1,4 @@
-import { db } from "@/src/firebase/firestore";
-import { auth } from "../firebase/config";
+import { auth, db } from "../firebase/config";
 import { addDoc, collection, doc, serverTimestamp, updateDoc } from "firebase/firestore";
 
 export async function startSession(goal: string): Promise<string | null> {

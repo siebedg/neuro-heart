@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { auth } from "@/src/firebase/config";
 import useAuthStore from "@/src/store/authStore";
 import { ImageBackground, StyleSheet } from "react-native";
-// import useMockHeartRate from "@/src/hooks/hr/useMockHeartRate";
+import useMockHeartRate from "@/src/hooks/hr/useMockHeartRate";
 
 export default function RootLayout() {
   const setUser = useAuthStore((s) => s.setUser);
@@ -19,10 +19,10 @@ export default function RootLayout() {
   }, []);
 
   // Hartslagmock wanneer geen wearable
-  // useMockHeartRate({
-  //   useSmoothing: true,
-  //   baseHeartRate: 130,
-  // });
+  useMockHeartRate({
+    useSmoothing: true,
+    baseHeartRate: 130,
+  });
 
   // useEffect(() => {
   //   runDemo();

@@ -22,8 +22,8 @@ export default function AccountScreen() {
       <View className="w-full max-w-sm">
         {/* Header image */}
         <Image
-          source={require("@/assets/images/onboarding-header.png")} // Placeholder, voeg zelf toe
-          className="w-full h-40 mb-6 rounded-x"
+          source={require("@/assets/images/icon-white.png")} // Placeholder, voeg zelf toe
+          className="w-full h-28 mb-6 rounded-x"
           resizeMode="contain"
         />
 

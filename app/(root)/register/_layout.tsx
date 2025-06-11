@@ -1,4 +1,3 @@
-// /app/register/_layout.tsx
 import { Stack } from "expo-router";
 
 export default function RegisterLayout() {
@@ -7,9 +6,9 @@ export default function RegisterLayout() {
       screenOptions={{
           headerShown: true,
     title: "",
-    headerTransparent: true, // ⬅️ geen achtergrond of border
-    headerShadowVisible: false, // ⬅️ verwijder onderlijn/border
-    headerTintColor: "white", // ⬅️ maak de pijl wit
+    headerTransparent: true, 
+    headerShadowVisible: false,
+    headerTintColor: "white", 
       }}
     />
   );

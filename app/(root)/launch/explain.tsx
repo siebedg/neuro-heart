@@ -16,7 +16,7 @@ export default function ExplainScreen() {
     // Auto-navigate after 7s
     const timeout = setTimeout(() => {
       router.push("/launch/moments");
-    }, 7000);
+    }, 5000);
 
     return () => clearTimeout(timeout);
   }, []);

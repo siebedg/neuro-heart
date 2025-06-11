@@ -48,7 +48,7 @@ export default function RegisterVerifyScreen() {
         password as string
       );
       Alert.alert("Success", "Account created!");
-      router.replace("/");
+      router.replace("/launch/sliders");
     } catch (err: any) {
       Alert.alert("Error", err.message);
     }
