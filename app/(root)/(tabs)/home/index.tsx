@@ -23,46 +23,101 @@
 
 // export default Index;
 
-import { Link } from "expo-router";
-import { View, Text, TouchableOpacity, ImageBackground } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ImageBackground,
+  ScrollView,
+} from "react-native";
+import { router } from "expo-router";
+import { Ionicons, Feather } from "@expo/vector-icons";
 
-function Index() {
+export default function HomeScreen() {
+  const sessions = [
+    { title: "Focus Boost", duration: "38 min", date: "Today, 8:20 AM" },
+    { title: "Recovery Wind-down", duration: "25 min", date: "Yesterday, 9:45 PM" },
+  ];
+
+  const returnRate = 82;
+  const suggestionStartRate = 64;
+
+  const StatCircle = ({ percent, label }: { percent: number; label: string }) => {
+    return (
+      <View className="items-center justify-center bg-white/10 border border-white/15 rounded-xl p-4 flex-1">
+        <View className="w-16 h-16 rounded-full border-4 border-white/20 items-center justify-center">
+          <Text className="text-white font-bold text-lg">{percent}%</Text>
+        </View>
+        <Text className="text-white/60 text-xs text-center mt-3">{label}</Text>
+      </View>
+    );
+  };
+
   return (
     <ImageBackground
       source={require("@/assets/images/background.png")}
-      resizeMode="cover"
       className="flex-1 px-6 py-12"
+      resizeMode="cover"
     >
-      <View className="flex-1 justify-between">
+      <ScrollView contentContainerStyle={{ paddingBottom: 32 }}>
         {/* Header */}
-        <View className="mt-6">
-          <Text className="text-white text-3xl font-bold mb-2">🎯 Today's Goal</Text>
-          <Text className="text-gray-200 text-base">
-            Focus & Flow – planned deep work session.
+        <Text className="text-white text-3xl font-bold mb-12">Home</Text>
+
+        {/* Recent Sessions */}
+        <Text className="text-white/60 text-xs mb-2">RECENT SESSIONS</Text>
+        <View className="space-y-3 mb-10">
+          {sessions.map((session, idx) => (
+            <View
+              key={idx}
+              className="bg-white/5 border border-white/10 rounded-xl p-4 mb-3"
+            >
+              <Text className="text-white font-semibold text-base">
+                {session.title}
+              </Text>
+              <Text className="text-white/50 text-sm">
+                {session.duration} · {session.date}
+              </Text>
+            </View>
+          ))}
+        </View>
+
+        {/* Stats Section */}
+        <Text className="text-white/60 text-xs mb-2">YOUR STATS</Text>
+        <View className="flex-row gap-4 mb-10">
+          <StatCircle percent={returnRate} label="Return to Home to start sessions" />
+          <StatCircle percent={suggestionStartRate} label="Start from smart suggestions" />
+        </View>
+
+        {/* Boost Suggestion */}
+        <View className="bg-white/10 border border-white/15 rounded-2xl p-5 mb-10">
+          <Text className="text-white text-xl font-semibold mb-1">
+            Need a boost?
           </Text>
-        </View>
-
-        {/* Main Action */}
-        <View className="items-center">
-          <TouchableOpacity className="bg-white/10 p-8 rounded-full border-2 border-white/30">
-            <FontAwesome name="play" size={32} color="#fff" />
+          <Text className="text-white/60 text-sm mb-4">
+            Try a quick 3-minute Power Tune to energize your focus.
+          </Text>
+          <TouchableOpacity
+            onPress={() => router.push("/player")}
+            className="py-3 px-6 rounded-full bg-white border border-white/20 w-max self-start"
+          >
+            <Text className="text-black text-sm font-bold">Start Power Tune</Text>
           </TouchableOpacity>
-          <Text className="text-white mt-4 text-lg">Start Session</Text>
         </View>
 
-        {/* Status Overview */}
-        <View className="space-y-4">
-          <View className="bg-white/10 p-4 rounded-2xl">
-            <Text className="text-white text-base">HRV Trend: +4%</Text>
+        {/* Nested Home Link */}
+        <TouchableOpacity
+          onPress={() => router.push("/home/nested-home")}
+          className="flex-row items-center justify-between px-4 py-5 bg-white/10 border border-white/15 rounded-xl"
+        >
+          <View className="flex-row items-center">
+            <Ionicons name="chevron-forward" size={20} color="#fff" />
+            <Text className="text-white text-base font-semibold ml-2">
+              The science behind Cortune
+            </Text>
           </View>
-          <View className="bg-white/10 p-4 rounded-2xl">
-            <Text className="text-white text-base">Last session: 32 min - Focus</Text>
-          </View>
-        </View>
-      </View>
+          <Feather name="arrow-right-circle" size={20} color="#fff" />
+        </TouchableOpacity>
+      </ScrollView>
     </ImageBackground>
   );
 }
-
-export default Index;

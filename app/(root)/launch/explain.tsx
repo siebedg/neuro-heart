@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Animated, View, Text, ImageBackground } from "react-native";
-import { router } from "expo-router";
+import { router, Stack } from "expo-router";
 
 export default function ExplainScreen() {
   const opacity = useRef(new Animated.Value(0)).current;
@@ -22,23 +22,34 @@ export default function ExplainScreen() {
   }, []);
 
   return (
-    <ImageBackground
-      source={require("@/assets/images/background.png")}
-      resizeMode="cover"
-      className="flex-1 px-6 justify-center items-center"
-    >
-      <Animated.View style={{ opacity }}>
-        {/* Visual placeholder */}
-        <View className="w-32 h-32 bg-white/10 rounded-full mb-8" />
+    <>
+      <Stack.Screen
+        options={{
+          headerShown: false,
+          title: "",
+          headerTransparent: true,
+          headerShadowVisible: false,
+          headerTintColor: "white", // witte back-arrow
+        }}
+      />
+      <ImageBackground
+        source={require("@/assets/images/background.png")}
+        resizeMode="cover"
+        className="flex-1 px-6 justify-center items-center"
+      >
+        <Animated.View style={{ opacity }}>
+          {/* Visual placeholder */}
+          <View className="w-32 h-32 bg-white/10 rounded-full mb-8" />
 
-        <Text className="text-white text-2xl font-bold text-center mb-4">
-          Cortune tunes your brain state.
-        </Text>
-        <Text className="text-gray-300 text-base text-center max-w-xs">
-          Through real-time heart rate sync and frequency-driven soundscapes,
-          Cortune helps you focus, power up, or recover faster.
-        </Text>
-      </Animated.View>
-    </ImageBackground>
+          <Text className="text-white text-2xl font-bold text-center mb-4">
+            Cortune tunes your brain state.
+          </Text>
+          <Text className="text-gray-300 text-base text-center max-w-xs">
+            Through real-time heart rate sync and frequency-driven soundscapes,
+            Cortune helps you focus, power up, or recover faster.
+          </Text>
+        </Animated.View>
+      </ImageBackground>
+    </>
   );
 }

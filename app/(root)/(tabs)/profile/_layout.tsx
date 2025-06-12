@@ -1,4 +1,4 @@
-import { Slot } from "expo-router";
+import { Slot, Stack } from "expo-router";
 import { ImageBackground, StyleSheet } from "react-native";
 
 export default function ProfileLayout() {
@@ -8,7 +8,15 @@ export default function ProfileLayout() {
       style={styles.bg}
       resizeMode="cover"
     >
-      <Slot screenOptions={{ headerShown: false }} />
+      <Stack
+        screenOptions={{
+          headerShown: true,
+          title: "",
+          headerTransparent: true,
+          headerShadowVisible: false,
+          headerTintColor: "white",
+        }}
+      />
     </ImageBackground>
   );
 }
