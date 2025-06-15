@@ -129,7 +129,7 @@ export default function PlayerScreen() {
         className="flex-1 justify-center items-center px-6"
         resizeMode="cover"
       >
-        <Text className="text-yellow-300 mb-4">Mock Heart Rate Active</Text>
+        <Text className="text-yellow-300 mb-12">Mock Heart Rate Active</Text>
         <View className="items-center mb-10">
           <Animated.View
             style={{ transform: [{ scale: pulse }] }}

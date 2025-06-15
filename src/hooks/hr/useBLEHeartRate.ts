@@ -16,20 +16,32 @@ const HR_CHARACTERISTIC_UUID = "2a37";
 
 const manager = new BleManager();
 
-export default function useBLEHeartRate(deviceKeyword: string) {
+export default function useBLEHeartRate(deviceKeyword: string, enabled: boolean) {
   const { sessionId } = useSessionManager();
   const setHr = useHeartRateStore((s) => s.setHr);
   const addHrToHistory = useHeartRateStore((s) => s.addHrToHistory);
-  const setCurrentHeartRateData = useHeartRateStore(
-    (s) => s.setCurrentHeartRateData
-  );
+  const setCurrentHeartRateData = useHeartRateStore((s) => s.setCurrentHeartRateData);
 
   const deviceRef = useRef<Device | null>(null);
   const subscriptionRef = useRef<Subscription | null>(null);
   const scanningRef = useRef(false);
 
+  // 🧼 Cleanup-effect: altijd actief
   useEffect(() => {
-    if (!deviceKeyword || deviceKeyword.length < 2) return;
+    if (!enabled) {
+      subscriptionRef.current?.remove();
+      subscriptionRef.current = null;
+      deviceRef.current?.cancelConnection();
+      deviceRef.current = null;
+      manager.stopDeviceScan();
+      scanningRef.current = false;
+      log("🛑 BLE disabled — cleaned up", "BLE");
+    }
+  }, [enabled]);
+
+  // 🧠 Main effect
+  useEffect(() => {
+    if (!enabled || !deviceKeyword || deviceKeyword.length < 2) return;
 
     resetHeartRateSmoothing();
 
@@ -124,7 +136,7 @@ export default function useBLEHeartRate(deviceKeyword: string) {
         }
       });
 
-      // Auto-timeout just in case
+      // Auto-timeout
       setTimeout(() => {
         manager.stopDeviceScan();
         scanningRef.current = false;
@@ -143,5 +155,5 @@ export default function useBLEHeartRate(deviceKeyword: string) {
       scanningRef.current = false;
       log("🔌 BLE connection cleaned up", "BLE");
     };
-  }, [deviceKeyword]);
+  }, [deviceKeyword, enabled]);
 }

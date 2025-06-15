@@ -43,7 +43,7 @@ export default function DeviceSelector({
     <FlatList
       data={knownDevices}
       keyExtractor={(item) => item.keyword}
-      contentContainerStyle={{ alignItems: "center", paddingTop: 20 }}
+        contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
       renderItem={({ item }) => (
         <View className="w-full max-w-sm mb-4 items-center">
           <Text className="text-white font-semibold text-lg mb-2">{item.label}</Text>

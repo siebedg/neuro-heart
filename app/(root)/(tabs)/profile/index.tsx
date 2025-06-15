@@ -51,9 +51,9 @@ export default function ProfileScreen() {
         {/* Profile Section */}
         <View className="items-center mt-20 space-y-6">
           {/* Reset Button */}
-          <TouchableOpacity onPress={resetOnboarding}>
+          {/* <TouchableOpacity onPress={resetOnboarding}>
             <Text className="text-red-600 text-small">Reset Onboarding</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
           {/* Profile Card */}
           <View className="bg-white/10 border border-white/20 rounded-xl p-6 w-full max-w-sm items-center">

@@ -24,7 +24,7 @@ export default function RootLayout() {
   useMockHeartRate({ useSmoothing: true, baseHeartRate: 130 }, useMockHR);
 
   // 2) BLE flow only when mock is off
-  useBLEHeartRate(useMockHR ? "" : selectedDeviceKeyword);
+  useBLEHeartRate(selectedDeviceKeyword, !useMockHR);
 
   return (
     <ImageBackground
