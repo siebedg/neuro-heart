@@ -13,12 +13,12 @@ const LEVELS = [
   {
     id: "beginner",
     label: "Beginner",
-    description: "New to training or mindfulness.",
+    description: "New to training.",
   },
   {
     id: "intermediate",
     label: "Intermediate",
-    description: "Train 1–3x/week or already mindful.",
+    description: "Train 1–3x/week.",
   },
   {
     id: "advanced",
@@ -57,12 +57,11 @@ export default function LevelScreen() {
         resizeMode="cover"
       >
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-          <Text className="text-white text-3xl font-bold text-center mt-48 mb-8">
+          <Text className="text-white text-[1.75rem] font-bold text-center mt-48 mb-8">
             What's your fitness level?
           </Text>
 
           <View className="w-full mx-auto space-y-4 mb-8">
-            {" "}
             {LEVELS.map((level) => (
               <TouchableOpacity
                 key={level.id}

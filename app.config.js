@@ -2,7 +2,7 @@ import "dotenv/config";
 
 export default {
   expo: {
-    name: "neuro-heart",
+    name: "Cortune",
     slug: "neuro-heart",
     owner: "jojoh",
     version: "1.0.0",
@@ -21,6 +21,25 @@ export default {
         foregroundImage: "./assets/images/latest-icon.png",
         backgroundColor: "#ffffff",
       },
+      fonts: [
+        {
+          fontFamily: "Inter",
+          fontDefinitions: [
+            {
+              path: "./assets/fonts/Poppins-Regular.ttf",
+            },
+            {
+              path: "./assets/fonts/Poppins-BoldItalic.ttf",
+              weight: 700,
+              style: "italic",
+            },
+            {
+              path: "./assets/fonts/Poppins-Bold.ttf",
+              weight: 700,
+            },
+          ],
+        },
+      ],
     },
     androidStatusBar: {
       barStyle: "light-content",
@@ -40,6 +59,12 @@ export default {
           imageWidth: 200,
           resizeMode: "cover",
           backgroundColor: "#432765",
+        },
+      ],
+      [
+        "expo-font",
+        {
+          fonts: ["./assets/fonts/Poppins-Regular.ttf"],
         },
       ],
     ],

@@ -7,7 +7,7 @@ import {
   Image,
 } from "react-native";
 import { useGoogleAuth } from "@/src/firebase/google_auth";
-import GoogleIcon from "@/src/components/GoogleIcon";
+import GoogleIcon from "@/src/components/ui/GoogleIcon";
 
 export default function AccountScreen() {
   const router = useRouter();

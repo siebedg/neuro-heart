@@ -1,4 +1,4 @@
-import { Slot, Stack } from "expo-router";
+import { Stack } from "expo-router";
 import { ImageBackground, StyleSheet } from "react-native";
 
 export default function HomeLayout() {
@@ -7,7 +7,15 @@ export default function HomeLayout() {
       source={require("../../../../assets/images/background.png")}
       style={styles.bg}
     >
-      <Slot screenOptions={{ headerShown: false }} />
+      <Stack
+        screenOptions={{
+          headerShown: false,
+          title: "",
+          headerTransparent: true,
+          headerShadowVisible: false,
+          headerTintColor: "white",
+        }}
+      />
     </ImageBackground>
   );
 }

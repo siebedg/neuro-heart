@@ -7,14 +7,14 @@ import {
   Switch,
   ImageBackground,
 } from "react-native";
-import { useState } from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "@/src/firebase/config";
 import { router, Stack } from "expo-router";
 import { Ionicons, MaterialIcons, Feather, Entypo } from "@expo/vector-icons";
+import useSettingsStore from "@/src/store/settingsStore";
 
 export default function SettingsScreen() {
-  const [useMockHR, setUseMockHR] = useState(false);
+  const { useMockHR, setUseMockHR } = useSettingsStore();
 
   const handleLogout = async () => {
     try {
@@ -83,7 +83,7 @@ export default function SettingsScreen() {
       />
       <ImageBackground
         source={require("@/assets/images/background.png")}
-        className="flex-1 justify-center px-6 pt-16 pb-20"
+        className="flex-1 justify-center px-6 pt-16 pb-16"
         resizeMode="cover"
       >
         <ScrollView contentContainerStyle={{ paddingBottom: 32 }}>

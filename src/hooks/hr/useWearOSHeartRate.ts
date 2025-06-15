@@ -11,7 +11,7 @@ export default function useWearOSHeartRate() {
   useEffect(() => {
     let lastWrite = Date.now();
 
-    // 👇 Hier koppel je later met echte WearOS SDK (via native bridge of module)
+    // Hier koppel je later met echte WearOS SDK (via native bridge of module)
     const mockWearOSInterval = setInterval(() => {
       const simulatedHr = 70 + Math.floor(Math.random() * 10); // 🔁 Simulatie → vervang later
       setHr(simulatedHr);
@@ -23,7 +23,7 @@ export default function useWearOSHeartRate() {
       }
     }, 1000); // Je zou hier in real use-case een event-listener hebben
 
-    return () => clearInterval(mockWearOSInterval); // 🔁 Vervang met echte unsubscribe-functie
+    return () => clearInterval(mockWearOSInterval); // Vervang met echte unsubscribe-functie
   }, []);
 
   return null;

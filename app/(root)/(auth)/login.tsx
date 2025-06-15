@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { router } from "expo-router";
 import { useGoogleAuth } from "@/src/firebase/google_auth";
-import GoogleIcon from "@/src/components/GoogleIcon";
+import GoogleIcon from "@/src/components/ui/GoogleIcon";
 
 export default function LoginScreen() {
   const { handleGoogleLogin } = useGoogleAuth();

@@ -83,7 +83,7 @@ export default function RegisterEmailScreen() {
           </Text>
 
           {/* Input */}
-          <View className="bg-white/10 rounded-3xl mb-6 overflow-hidden">
+          <View className="bg-white/10 rounded-2xl mb-6 overflow-hidden">
             <TextInput
               className="text-white px-4 py-4 text-lg"
               placeholder="Enter your email"

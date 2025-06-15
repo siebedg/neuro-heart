@@ -17,7 +17,8 @@ export default function useMockHeartRate(
   options: UseMockHeartRateOptions = {
     useSmoothing: true,
     baseHeartRate: 130,
-  }
+  },
+  enabled: boolean = true
 ) {
   // State management
   const setHr = useHeartRateStore((state) => state.setHr);
@@ -27,6 +28,7 @@ export default function useMockHeartRate(
   );
 
   useEffect(() => {
+    if (!enabled) return;
     resetHeartRateSmoothing();
 
     const interval = startMockHeartRate((data: MockHeartRateData) => {
@@ -53,7 +55,7 @@ export default function useMockHeartRate(
     }, options.baseHeartRate ?? 130);
 
     return () => clearInterval(interval);
-  }, [options.useSmoothing, options.baseHeartRate]);
+  }, [enabled, options.useSmoothing, options.baseHeartRate]);
 
   return null;
 }

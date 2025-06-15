@@ -8,14 +8,14 @@ import {
 } from "react-native";
 import { router, Stack } from "expo-router";
 import useOnboardingStore from "@/src/store/onboardingStore";
-import { Ionicons, MaterialIcons, FontAwesome5 } from "@expo/vector-icons";
+import { MaterialIcons, FontAwesome5 } from "@expo/vector-icons";
 
 const primaryOptions = [
   {
     key: "running",
     title: "During running",
     description: "To stay in rhythm, stay focused, and tune my effort.",
-    icon: <Ionicons name="walk" size={24} color="#fff" />,
+    icon: <FontAwesome5 name="running" size={24} color="#fff" />,
   },
   {
     key: "recovery",
@@ -43,7 +43,6 @@ const MomentScreen = () => {
 
   return (
     <>
-      {" "}
       <Stack.Screen
         options={{
           headerShown: false,
@@ -58,12 +57,12 @@ const MomentScreen = () => {
         resizeMode="cover"
         className="flex-1 px-6 py-12"
       >
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-          <Text className="text-white text-3xl font-bold text-center mt-40">
+<ScrollView contentContainerStyle={{ flexGrow: 1}}>
+          <Text className="text-white text-[1.75rem] font-bold text-center mt-40">
             When do you want audio to
-          </Text>{" "}
-          <Text className="text-white text-3xl font-bold text-center mb-8">
-            guide your performance?{" "}
+          </Text>
+          <Text className="text-white text-[1.75rem] font-bold text-center mb-8">
+            guide your performance?
           </Text>
           <View className="space-y-4 mb-8">
             {primaryOptions.map((option) => {

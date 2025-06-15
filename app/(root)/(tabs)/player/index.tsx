@@ -1,38 +1,63 @@
-// PlayerScreen.tsx
+// src/app/(root)/(tabs)/player/index.tsx
 import React, { useEffect, useState, useRef } from "react";
-import { View, Text, TouchableOpacity, ImageBackground, Animated, Easing, Alert } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ImageBackground,
+  Animated,
+  Easing,
+  Alert,
+} from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
+import { BleManager, State } from "react-native-ble-plx";
+
 import useHeartRateStore from "@/src/store/heartRateStore";
 import useOnboardingStore from "@/src/store/onboardingStore";
 import { useAudioStore } from "@/src/audio/store/audioStore";
 import { preloadZone } from "@/src/audio/engine/audioPreloader";
-import { FontAwesome } from "@expo/vector-icons";
-import DeviceSelector from "@/src/components/DeviceSelector";
+import useSettingsStore from "@/src/store/settingsStore";
+import DeviceSelector from "@/src/components/player/DeviceSelector";
+import BluetoothPrompt from "@/src/components/player/BluetoothPrompt";
+import { useRouter } from "expo-router";
 
 export default function PlayerScreen() {
   const hr = useHeartRateStore((s) => s.hr || 97);
-  const currentHeartRateData = useHeartRateStore((s) => s.currentHeartRateData);
+  const current = useHeartRateStore((s) => s.currentHeartRateData);
   const { play, stop, isPlaying } = useAudioStore();
   const { useCase, intent } = useOnboardingStore();
 
-  const [pulse] = useState(new Animated.Value(1));
+  const { useMockHR } = useSettingsStore();
+  const [connected, setConnected] = useState(false);
+
   const [autoRunning, setAutoRunning] = useState(false);
-  const [deviceConnected, setDeviceConnected] = useState(false);
-  const lastZoneRef = useRef<string | null>(null);
-  const lastStateRef = useRef<string | null>(null);
+  const pulse = useRef(new Animated.Value(1)).current;
+  const lastZone = useRef<string | null>(null);
+  const lastState = useRef<string | null>(null);
 
-  const zoneMessage = hr < 100 ? "Zone too low to engage" : "Ready to focus";
-  const intentText = {
-    power: "Primed for intensity",
-    focus: "Tuned for deep concentration",
-    recovery: "Set for nervous system reset",
-  }[intent || ""];
+  const manager = useRef(new BleManager()).current;
+  const [bleState, setBleState] = useState<State | null>(null);
 
-  const useCaseText = {
-    running: "during your run",
-    recovery: "post-workout recovery",
-    boost: "for your next performance push",
-  }[useCase || ""];
+  const router = useRouter();
 
+  const handleConnect = async () => {
+    // Wacht even tot useBLEHeartRate actief wordt na setKeyword
+    await new Promise((r) => setTimeout(r, 1000));
+    setConnected(true);
+
+    // Optioneel: navigatie zodra ready (indien je naar andere screen wilt)
+    // router.push("/player/connected"); // indien je aparte route hebt
+  };
+
+  // Monitor Bluetooth state
+  useEffect(() => {
+    const sub = manager.onStateChange((state) => {
+      setBleState(state);
+    }, true);
+    return () => sub.remove();
+  }, [manager]);
+
+  // Pulse animation
   useEffect(() => {
     Animated.loop(
       Animated.sequence([
@@ -50,78 +75,156 @@ export default function PlayerScreen() {
         }),
       ])
     ).start();
-  }, []);
+  }, [pulse]);
 
+  // Auto session on zone change
   useEffect(() => {
-    if (!autoRunning || !currentHeartRateData) return;
-    const { zone, state } = currentHeartRateData.zone;
-    const zoneChanged = zone !== lastZoneRef.current || state !== lastStateRef.current;
-
-    if (zoneChanged) {
-      lastZoneRef.current = zone;
-      lastStateRef.current = state;
+    if (!autoRunning || !current) return;
+    const { zone, state } = current.zone;
+    if (zone !== lastZone.current || state !== lastState.current) {
+      lastZone.current = zone;
+      lastState.current = state;
       (async () => {
         await preloadZone(zone, state);
         play(zone, state);
       })();
     }
-  }, [currentHeartRateData, autoRunning]);
+  }, [current, autoRunning]);
 
-  const startAutoSession = async () => {
-    if (!currentHeartRateData) {
+  const startSession = async () => {
+    if (!current) {
       Alert.alert("⚠️ Geen hartslagdata", "Wacht op signaal van de HR-band.");
       return;
     }
-    const { zone, state } = currentHeartRateData.zone;
+    const { zone, state } = current.zone;
     await preloadZone(zone, state);
-    lastZoneRef.current = zone;
-    lastStateRef.current = state;
+    lastZone.current = zone;
+    lastState.current = state;
     play(zone, state);
     setAutoRunning(true);
   };
 
-  const stopAutoSession = () => {
-    setAutoRunning(false);
+  const stopSession = () => {
     stop();
+    setAutoRunning(false);
   };
 
+  const zoneMsg = hr < 100 ? "Zone too low to engage" : "Ready to focus";
+  const intentMsg = {
+    power: "Primed for intensity",
+    focus: "Tuned for deep concentration",
+    recovery: "Set for nervous system reset",
+  }[intent || ""];
+  const caseMsg = {
+    running: "during your run",
+    recovery: "post-workout recovery",
+    boost: "for your next performance push",
+  }[useCase || ""];
+
+  // If in mock mode, show mock UI
+  if (useMockHR) {
+    return (
+      <ImageBackground
+        source={require("@/assets/images/background.png")}
+        className="flex-1 justify-center items-center px-6"
+        resizeMode="cover"
+      >
+        <Text className="text-yellow-300 mb-4">Mock Heart Rate Active</Text>
+        <View className="items-center mb-10">
+          <Animated.View
+            style={{ transform: [{ scale: pulse }] }}
+            className="w-56 h-56 rounded-full border-4 border-white/30 justify-center items-center mb-4 bg-white/10"
+          >
+            <Text className="text-white text-5xl font-bold">{hr}</Text>
+            <FontAwesome
+              name="heart"
+              size={28}
+              color="#EF4444"
+              style={{ marginTop: 4 }}
+            />
+            <Text className="text-white/60 text-base">BPM</Text>
+          </Animated.View>
+          <Text className="text-white text-lg font-semibold text-center mt-2">
+            {zoneMsg}
+          </Text>
+        </View>
+        <View className="bg-white/10 rounded-xl p-4 mb-6 w-full max-w-sm">
+          <Text className="text-white text-base mb-1">Personalized Tune</Text>
+          <Text className="text-white/70">
+            {intentMsg}
+            {caseMsg ? ` — optimal ${caseMsg}` : ""}
+          </Text>
+        </View>
+        <TouchableOpacity
+          className="bg-white/10 border border-white/30 rounded-full py-4 px-10"
+          onPress={isPlaying ? stopSession : startSession}
+        >
+          <Text className="text-white text-lg font-semibold">
+            {isPlaying ? "Stop Session" : "Start Session"}
+          </Text>
+        </TouchableOpacity>
+      </ImageBackground>
+    );
+  }
+
+  // If Bluetooth off, prompt user
+  if (bleState !== State.PoweredOn) {
+    return <BluetoothPrompt />;
+  }
+
+  // BLE mode: show selector until connected
+  if (!connected) {
+    return (
+      <View className="flex-1 justify-center items-center px-6">
+        <DeviceSelector onConnect={handleConnect} />{" "}
+      </View>
+    );
+  }
+
+  // When connected
   return (
     <ImageBackground
       source={require("@/assets/images/background.png")}
       className="flex-1 justify-center items-center px-6"
       resizeMode="cover"
     >
-      <DeviceSelector
-        onStart={startAutoSession}
-        onStop={stopAutoSession}
-        isPlaying={isPlaying}
-        currentHeartRateData={currentHeartRateData}
-        onConnect={() => setDeviceConnected(true)}
-      />
-
-      {deviceConnected && (
-        <>
-          <View className="items-center mb-10">
-            <Animated.View
-              style={{
-                transform: [{ scale: pulse }],
-                backgroundColor: hr >= 120 ? "rgba(0,0,30,0.15)" : "rgba(255,255,255,0.08)",
-              }}
-              className="w-56 h-56 rounded-full border-4 border-white/30 justify-center items-center mb-4"
-            >
-              <Text className="text-white text-5xl font-bold">{hr}</Text>
-              <FontAwesome name="heart" size={28} color="#EF4444" style={{ marginTop: 4 }} />
-              <Text className="text-white/60 text-base">BPM</Text>
-            </Animated.View>
-            <Text className="text-white text-lg font-semibold text-center mb-1 mt-4">{zoneMessage}</Text>
-          </View>
-
-          <View className="bg-white/10 rounded-xl p-4 mb-6 w-full max-w-sm">
-            <Text className="text-white text-base mb-1">Personalized Tune</Text>
-            <Text className="text-white/70">{intentText} {useCaseText ? `— optimal ${useCaseText}` : ""}</Text>
-          </View>
-        </>
-      )}
+      <TouchableOpacity
+        className="bg-white/10 border border-white/30 rounded-full py-4 px-10 mb-6"
+        onPress={isPlaying ? stopSession : startSession}
+      >
+        <Text className="text-white text-lg font-semibold">
+          {isPlaying ? "Stop Session" : "Start Session"}
+        </Text>
+      </TouchableOpacity>
+      <View className="items-center mb-10">
+        <Animated.View
+          style={{
+            transform: [{ scale: pulse }],
+            backgroundColor:
+              hr >= 120 ? "rgba(0,0,30,0.15)" : "rgba(255,255,255,0.08)",
+          }}
+          className="w-56 h-56 rounded-full border-4 border-white/30 justify-center items-center mb-4"
+        >
+          <Text className="text-white text-5xl font-bold">{hr}</Text>
+          <FontAwesome
+            name="heart"
+            size={28}
+            color="#EF4444"
+            style={{ marginTop: 4 }}
+          />
+          <Text className="text-white/60 text-base">BPM</Text>
+        </Animated.View>
+        <Text className="text-white text-lg font-semibold text-center mb-1 mt-4">
+          {zoneMsg}
+        </Text>
+      </View>
+      <View className="bg-white/10 rounded-xl p-4 mb-6 w-full max-w-sm">
+        <Text className="text-white text-base mb-1">Personalized Tune</Text>
+        <Text className="text-white/70">
+          {intentMsg}
+          {caseMsg ? ` — optimal ${caseMsg}` : ""}
+        </Text>
+      </View>
     </ImageBackground>
   );
 }

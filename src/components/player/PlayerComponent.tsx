@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View } from "react-native";
 import useBLEHeartRate from "@/src/hooks/hr/useBLEHeartRate";
-import SelectHRDevice from "./SelectDevice";
+import SelectHRDevice from "./SelectHRDevice";
 import AudioSessionController from "./AudioSessionController";
 
 

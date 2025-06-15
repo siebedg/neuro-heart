@@ -45,11 +45,11 @@ export default function IntentScreen() {
       className="flex-1 px-6 py-12"
     >
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <Text className="text-white text-3xl font-bold text-center mt-40">
-          What do you want to tune
+        <Text className="text-white text-[1.75rem] font-bold text-center mt-40">
+          What do you want to 
         </Text>
-        <Text className="text-white text-3xl font-bold text-center mb-8">
-          into today?
+        <Text className="text-white text-[1.75rem] font-bold text-center mb-8">
+          tune into today?
         </Text>
 
         <View className="space-y-4 mb-8">

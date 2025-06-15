@@ -230,7 +230,7 @@ export default function PersonalizationScreen() {
         </Animated.View>
 
         {/* Sliders Container */}
-        <View className="bg-white/10 rounded-3xl p-6 mb-8">
+        <View className="bg-white/10 rounded-2xl p-6 mb-8">
           {SLIDERS.map((slider, index) => renderSlider(slider, index))}
         </View>
       </View>
